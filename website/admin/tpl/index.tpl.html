@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{t:title}}</title>
+<meta name="description" content="{{a:meta.desc}}">
+<meta name="theme-color" content="#5e0f0f">
+<meta name="color-scheme" content="light">
+<!-- WhatsApp / Facebook पर लिंक भेजने पर दिखने वाली जानकारी -->
+<meta property="og:title" content="{{a:title}}">
+<meta property="og:description" content="{{a:meta.desc}}">
+<meta property="og:type" content="website">
+<meta property="og:image" content="{{OG_IMAGE}}">
+<meta property="og:url" content="{{SITE_URL}}/">
+<meta property="og:locale" content="hi_IN">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="{{SITE_URL}}/">
+{{GSV}}{{JSONLD}}
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Mukta:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- यह पेज एडमिन पैनल अपने आप बनाता है। यहाँ सीधे बदलाव न करें, वे अगली बार मिट जाएँगे। -->
+<link rel="stylesheet" href="css/style.css?v={{V}}">
+<!-- पिछली बार चुनी गई भाषा अंग्रेज़ी हो तो पेज खुलते समय हिंदी की झलक न दिखे -->
+<script>try{if(localStorage.getItem('syf-lang')==='en'){document.documentElement.className+=' en-wait';setTimeout(function(){document.documentElement.classList.remove('en-wait')},1500)}}catch(e){}</script>
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="#top"><img src="images/logo.webp" alt="{{a:logo.alt}}" data-i-alt="logo.alt"><span data-i="brand">{{t:brand}}</span></a>
+  <div class="lang" role="group" aria-label="भाषा चुनें / Choose language">
+    <button type="button" data-lang="hi" aria-pressed="true" lang="hi"><span class="long">हिंदी</span><span class="short">हिं</span></button>
+    <button type="button" data-lang="en" aria-pressed="false" lang="en"><span class="long">English</span><span class="short">EN</span></button>
+  </div>
+  <a class="btn gold" href="#donate" data-i="donate">{{t:donate}}</a>
+  <div class="bar2">
+  <nav class="links" aria-label="{{a:nav.aria}}" data-i-aria="nav.aria">
+    <a href="#work" data-i="nav.work">{{t:nav.work}}</a><a href="#about" data-i="nav.about">{{t:nav.about}}</a><a href="#courses" data-i="nav.courses">{{t:nav.courses}}</a><a href="#schools" data-i="nav.schools">{{t:nav.schools}}</a><a href="#join" data-i="nav.join">{{t:nav.join}}</a><a href="#contact" data-i="nav.contact">{{t:nav.contact}}</a><!--IF:gallery--><a href="#gallery" data-i="nav.gallery">{{t:nav.gallery}}</a><!--/IF:gallery--><a href="blogs/" data-i="nav.blog">{{t:nav.blog}}</a>
+  </nav>
+    <button class="sbtn" id="sOpen" type="button" aria-haspopup="dialog" aria-label="{{a:search.btn}}" data-i-aria="search.btn"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M20 20l-4.6-4.6"/></svg><span data-i="search.btn">{{t:search.btn}}</span></button>
+  </div>
+</header>
+
+<section class="hero" id="top" aria-roledescription="carousel" aria-label="{{a:sl.label}}" data-i-aria="sl.label">
+  <div class="slides" id="slides">
+    <div class="slide" role="group" aria-roledescription="slide">
+      <div class="band">
+        <div class="wrap hgrid">
+          <div class="ht">
+            <h1 data-i="hero.h1">{{t:hero.h1}}</h1>
+            <p class="slogan" data-i="slogan">{{t:slogan}}</p>
+          </div>
+          <div class="emblem">
+            <svg id="rays" viewBox="-100 -100 200 200" aria-hidden="true"></svg>
+            <img src="images/logo.webp" alt="{{a:logo.big.alt}}" data-i-alt="logo.big.alt">
+          </div>
+          <div class="hb">
+            <p class="lead" data-i="hero.lead">{{t:hero.lead}}</p>
+            <div class="acts">
+              <a class="btn gold" href="#schools" data-i="hero.find">{{t:hero.find}}</a>
+              <a class="btn line" href="#join" data-i="join.cta">{{t:join.cta}}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slnav" id="slnav">
+    <button class="slbtn" id="slPrev" type="button" aria-label="{{a:sl.prev}}" data-i-aria="sl.prev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <div class="dots" id="dots"></div>
+    <button class="slbtn" id="slNext" type="button" aria-label="{{a:sl.next}}" data-i-aria="sl.next"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+  </div>
+</section>
+
+<section class="stats band" id="work">
+  <div class="wrap">
+    <h2 data-i="stats.h2">{{t:stats.h2}}</h2>
+    <div class="sgrid" id="sgrid"></div>
+    <p class="note" data-i="stats.note">{{t:stats.note}}</p>
+  </div>
+</section>
+
+<section class="band about" id="about">
+  <div class="wrap agrid">
+    <div>
+      <h2 data-i="about.h2">{{t:about.h2}}</h2>
+      <p class="lead" style="margin-top:14px" data-i="about.lead">{{t:about.lead}}</p>
+      <p data-i="about.p">{{t:about.p}}</p>
+      <div class="insp">
+        <h3 data-i="insp.h3">{{t:insp.h3}}</h3>
+        <p style="margin:8px 0 0" data-i="insp.p">{{t:insp.p}}</p>
+      </div>
+      <div class="founder">
+        <div class="av" aria-hidden="true" data-i="founder.av">{{t:founder.av}}</div>
+        <div><b data-i="founder.name">{{t:founder.name}}</b><span data-i="founder.role">{{t:founder.role}}</span></div>
+      </div>
+    </div>
+    <div class="plan">
+      <h3 data-i="plan.h3">{{t:plan.h3}}</h3>
+      <ol>
+        <li><b data-i="plan.1.t">{{t:plan.1.t}}</b><span data-i="plan.1.d">{{t:plan.1.d}}</span></li>
+        <li><b data-i="plan.2.t">{{t:plan.2.t}}</b><span data-i="plan.2.d">{{t:plan.2.d}}</span></li>
+        <li><b data-i="plan.3.t">{{t:plan.3.t}}</b><span data-i="plan.3.d">{{t:plan.3.d}}</span></li>
+        <li><b data-i="plan.4.t">{{t:plan.4.t}}</b><span data-i="plan.4.d">{{t:plan.4.d}}</span></li>
+        <li><b data-i="plan.5.t">{{t:plan.5.t}}</b><span data-i="plan.5.d">{{t:plan.5.d}}</span></li>
+        <li><b data-i="plan.6.t">{{t:plan.6.t}}</b><span data-i="plan.6.d">{{t:plan.6.d}}</span></li>
+        <li><b data-i="plan.7.t">{{t:plan.7.t}}</b><span data-i="plan.7.d">{{t:plan.7.d}}</span></li>
+        <li><b data-i="plan.8.t">{{t:plan.8.t}}</b><span data-i="plan.8.d">{{t:plan.8.d}}</span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="band courses" id="courses">
+  <div class="wrap">
+    <h2 data-i="courses.h2">{{t:courses.h2}}</h2>
+    <p class="lead" style="margin-top:12px" data-i="courses.lead">{{t:courses.lead}}</p>
+    <p class="swipe" aria-hidden="true" data-i="courses.swipe">{{t:courses.swipe}}</p>
+    <div class="cgrid" id="cgrid"></div>
+  </div>
+</section>
+
+<!--IF:gallery-->
+<section class="band gallery" id="gallery">
+  <div class="wrap">
+    <h2 data-i="gal.h2">{{t:gal.h2}}</h2>
+    <p class="lead" style="margin-top:12px" data-i="gal.lead">{{t:gal.lead}}</p>
+    <div class="ggrid">{{GALLERY_ITEMS}}</div>
+  </div>
+</section>
+<!--/IF:gallery-->
+
+<section class="band" id="schools">
+  <div class="wrap">
+    <h2 data-i="schools.h2">{{t:schools.h2}}</h2>
+    <div class="pick">
+      <div><label for="fs" data-i="f.state">{{t:f.state}}</label><select id="fs"></select></div>
+      <div><label for="fd" data-i="f.district">{{t:f.district}}</label><select id="fd" disabled></select></div>
+    </div>
+    <div class="ares hint" id="ares" aria-live="polite"></div>
+  </div>
+</section>
+
+<!--IF:posts-->
+<section class="band blogt" id="blog">
+  <div class="wrap">
+    <div class="bhead"><h2 data-i="blogt.h2">{{t:blogt.h2}}</h2><a class="more" href="blogs/" data-i="blogt.all">{{t:blogt.all}}</a></div>
+    <div class="bgrid">{{BLOG_CARDS}}</div>
+  </div>
+</section>
+<!--/IF:posts-->
+
+<section class="band join" id="join">
+  <div class="wrap jgrid">
+    <div>
+      <h2 data-i="join.h2">{{t:join.h2}}</h2>
+      <p class="lead" style="margin-top:12px" data-i="join.lead">{{t:join.lead}}</p>
+      <ul class="ways">
+        <li><b data-i="way.1.t">{{t:way.1.t}}</b><span data-i="way.1.d">{{t:way.1.d}}</span></li>
+        <li><b data-i="way.2.t">{{t:way.2.t}}</b><span data-i="way.2.d">{{t:way.2.d}}</span></li>
+        <li><b data-i="way.3.t">{{t:way.3.t}}</b><span data-i="way.3.d">{{t:way.3.d}}</span></li>
+        <li><b data-i="way.4.t">{{t:way.4.t}}</b><span data-i="way.4.d">{{t:way.4.d}}</span></li>
+      </ul>
+    </div>
+    <form class="panel" id="jform" novalidate>
+      <div class="fgrid">
+        <div><label for="jn" data-i="j.name">{{t:j.name}}</label><input id="jn" autocomplete="name"></div>
+        <div><label for="jm" data-i="j.mobile">{{t:j.mobile}}</label><input id="jm" inputmode="numeric" autocomplete="tel" placeholder="{{a:j.mobile.ph}}" data-i-ph="j.mobile.ph"></div>
+        <div><label for="jd" data-i="j.district">{{t:j.district}}</label><input id="jd"></div>
+        <div><label for="jv" data-i="j.village">{{t:j.village}}</label><input id="jv"></div>
+        <div class="full"><label for="jt" data-i="j.how">{{t:j.how}}</label>
+          <select id="jt"><option data-i="j.opt1">{{t:j.opt1}}</option><option data-i="j.opt2">{{t:j.opt2}}</option><option data-i="j.opt3">{{t:j.opt3}}</option><option data-i="j.opt4">{{t:j.opt4}}</option></select></div>
+        <div class="full"><label for="jw" data-i="j.work">{{t:j.work}}</label>
+          <select id="jw"><option value="" data-i="j.w0">{{t:j.w0}}</option><option data-i="j.w1">{{t:j.w1}}</option><option data-i="j.w2">{{t:j.w2}}</option><option data-i="j.w3">{{t:j.w3}}</option><option data-i="j.w4">{{t:j.w4}}</option><option data-i="j.w5">{{t:j.w5}}</option><option data-i="j.w6">{{t:j.w6}}</option></select></div>
+      </div>
+      <p class="err" id="jerr" role="alert"></p>
+      <button class="btn maroon" type="submit" style="width:100%" data-i="j.submit">{{t:j.submit}}</button>
+      <div class="res" id="jres" hidden>
+        <p data-i="j.ready">{{t:j.ready}}</p>
+        <a class="btn gold" id="jlink" href="#" target="_blank" rel="noopener" style="width:100%" data-i="j.send">{{t:j.send}}</a>
+      </div>
+    </form>
+  </div>
+</section>
+
+<section class="band donate" id="donate">
+  <div class="wrap jgrid">
+    <div>
+      <h2 data-i="don.h2">{{t:don.h2}}</h2>
+      <p class="lead" style="margin-top:12px" data-i="don.lead">{{t:don.lead}}</p>
+      <ul class="uses">
+        <li data-i="use.1">{{t:use.1}}</li>
+        <li data-i="use.2">{{t:use.2}}</li>
+        <li data-i="use.3">{{t:use.3}}</li>
+        <li data-i="use.4">{{t:use.4}}</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <p class="ptitle" id="dwhat" data-i="d.what">{{t:d.what}}</p>
+      <p class="note" style="margin:0 0 12px" data-i="d.multi">{{t:d.multi}}</p>
+      <div class="items" id="items" role="group" aria-labelledby="dwhat">
+        <button type="button" class="item" data-k="books" aria-pressed="false"><svg class="tick" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span data-i="d.i1">{{t:d.i1}}</span></button>
+        <button type="button" class="item" data-k="copies" aria-pressed="false"><svg class="tick" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span data-i="d.i2">{{t:d.i2}}</span></button>
+        <button type="button" class="item" data-k="pens" aria-pressed="false"><svg class="tick" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span data-i="d.i3">{{t:d.i3}}</span></button>
+        <button type="button" class="item" data-k="stationery" aria-pressed="false"><svg class="tick" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span data-i="d.i4">{{t:d.i4}}</span></button>
+        <button type="button" class="item" data-k="other" aria-pressed="false"><svg class="tick" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span data-i="d.i5">{{t:d.i5}}</span></button>
+      </div>
+      <div class="otherbox" id="otherBox" hidden>
+        <label for="dother" data-i="d.other">{{t:d.other}}</label>
+        <input id="dother" placeholder="{{a:d.other.ph}}" data-i-ph="d.other.ph">
+      </div>
+      <div class="upi" id="upiBox" hidden>
+        <span class="lbl">UPI ID</span>
+        <div class="id"><span id="upiId"></span><button class="btn mini" id="upiCopy" type="button">कॉपी करें</button></div>
+        <div class="qrwrap">
+          <div class="qr" id="qr"></div>
+          <p data-i="d.qr.cap">{{t:d.qr.cap}}</p>
+        </div>
+        <a class="btn gold" id="dupi" href="#" data-i="d.upi">{{t:d.upi}}</a>
+      </div>
+      <a class="btn wa" id="dbtn" href="#" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18.5V6.5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H8z"/><path d="M8.5 9.5h7M8.5 12.5h4.5"/></svg><span data-i="d.btn">{{t:d.btn}}</span></a>
+      <a class="btn ghost" href="#contact" data-i="d.contact">{{t:d.contact}}</a>
+      <p class="note" data-i="d.note">{{t:d.note}}</p>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="contact">
+  <div class="wrap">
+    <h2 data-i="contact.h2">{{t:contact.h2}}</h2>
+    <div class="cgrid2">
+      <a class="ci c-fb" id="cFb" href="#" target="_blank" rel="noopener"><span class="cicon"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 19c.6-3.3 3-5.2 6-5.2s5.4 1.9 6 5.2"/><circle cx="17" cy="9" r="2.6"/><path d="M16.2 13.9c2.4.2 4.2 1.8 4.8 4.6"/></svg></span><span class="ctext"><b>Facebook</b></span></a>
+      <a class="ci c-wa" id="cWa" href="#" target="_blank" rel="noopener"><span class="cicon"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18.5V6.5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H8z"/><path d="M8.5 9.5h7M8.5 12.5h4.5"/></svg></span><span class="ctext"><b>WhatsApp</b></span></a>
+      <a class="ci c-em" id="cEmail" href="#"><span class="cicon"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2"/><path d="M4.5 7l7.5 6 7.5-6"/></svg></span><span class="ctext"><b data-i="c.email">{{t:c.email}}</b><em id="cEmailText"></em></span></a>
+    </div>
+  </div>
+</section>
+
+<footer class="band">
+  <div class="wrap">
+    <div class="fg">
+      <div>
+        <div class="fb"><img src="images/logo.webp" alt=""><div><b data-i="foot.org">{{t:foot.org}}</b><span data-i="foot.by">{{t:foot.by}}</span></div></div>
+        <p class="slogan" data-i="slogan">{{t:slogan}}</p>
+        <p data-i="foot.tag">{{t:foot.tag}}</p>
+      </div>
+      <nav aria-label="{{a:foot.aria}}" data-i-aria="foot.aria"><h3 data-i="foot.web">{{t:foot.web}}</h3><a href="#about" data-i="nav.about">{{t:nav.about}}</a><a href="#courses" data-i="nav.courses">{{t:nav.courses}}</a><a href="#schools" data-i="nav.schools">{{t:nav.schools}}</a><a href="#work" data-i="nav.work">{{t:nav.work}}</a><!--IF:gallery--><a href="#gallery" data-i="nav.gallery">{{t:nav.gallery}}</a><!--/IF:gallery--><a href="blogs/" data-i="nav.blog">{{t:nav.blog}}</a></nav>
+      <nav aria-label="{{a:foot.join}}" data-i-aria="foot.join"><h3 data-i="foot.join">{{t:foot.join}}</h3><a href="#join" data-i="join.cta">{{t:join.cta}}</a><a href="#donate" data-i="donate">{{t:donate}}</a><a href="#contact" data-i="nav.contact">{{t:nav.contact}}</a><a id="fFb" href="#" target="_blank" rel="noopener">Facebook</a></nav>
+    </div>
+    <p class="copy">© <span id="year">2026</span> <span data-i="foot.copy">{{t:foot.copy}}</span></p>
+  </div>
+</footer>
+
+<div class="smodal" id="sModal" hidden role="dialog" aria-modal="true" aria-label="{{a:search.title}}" data-i-aria="search.title">
+  <div class="sbox">
+    <div class="shead">
+      <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M20 20l-4.6-4.6"/></svg>
+      <input id="sq" type="search" autocomplete="off" placeholder="{{a:search.ph}}" data-i-ph="search.ph" aria-label="{{a:search.title}}" data-i-aria="search.title">
+      <button class="sclose" id="sClose" type="button" data-i="search.close">{{t:search.close}}</button>
+    </div>
+    <p class="stitle" id="sTitle"></p>
+    <div class="sres" id="sres"></div>
+  </div>
+</div>
+
+<script src="js/districts.js?v={{V}}"></script>
+<script src="js/site-data.js?v={{V}}"></script>
+<script src="js/lang.js?v={{V}}"></script>
+<script src="js/qr.js?v={{V}}"></script>
+<script src="js/app.js?v={{V}}"></script>
+</body>
+</html>

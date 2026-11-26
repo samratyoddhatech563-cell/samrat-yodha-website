@@ -1,0 +1,7 @@
+# सम्राट योद्धा फाउंडेशन — मुख्य वेबसाइट की सेटिंग
+# पेज हर बार ताज़ा लिया जाए, ताकि एडमिन पैनल का बदलाव तुरंत दिखे
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html|xml|txt)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+</IfModule>

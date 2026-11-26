@@ -1,0 +1,13 @@
+# एडमिन पैनल Google में न दिखे
+<IfModule mod_headers.c>
+  Header set X-Robots-Tag "noindex, nofollow"
+</IfModule>
+<FilesMatch "^(lib|build|cli-build)\.php$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>

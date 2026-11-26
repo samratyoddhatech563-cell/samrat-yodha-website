@@ -1,0 +1,716 @@
+{
+ "version": 1,
+ "site": {
+  "url": "https://samratyodhafoundation.org",
+  "gsv": ""
+ },
+ "config": {
+  "whatsapp": "919670930563",
+  "facebook": "https://www.facebook.com/share/19tK3Xy29k/",
+  "email": "samratyodha563@gmail.com",
+  "upi": "",
+  "upiName": "Samrat Yodha Foundation",
+  "qrImage": ""
+ },
+ "stats": {
+  "pathshalas": 78,
+  "children": 1330,
+  "districts": 86,
+  "centres": 0
+ },
+ "texts": {
+  "brand": {
+   "hi": "सम्राट योद्धा<small>फाउंडेशन</small>",
+   "en": ""
+  },
+  "donate": {
+   "hi": "दान करें",
+   "en": "Donate"
+  },
+  "nav.work": {
+   "hi": "उपलब्धियाँ",
+   "en": "Achievements"
+  },
+  "nav.about": {
+   "hi": "हमारे बारे में",
+   "en": "About us"
+  },
+  "nav.courses": {
+   "hi": "पाठ्यक्रम",
+   "en": "Courses"
+  },
+  "nav.schools": {
+   "hi": "पाठशालाएँ",
+   "en": "Pathshalas"
+  },
+  "nav.join": {
+   "hi": "जुड़ें",
+   "en": "Join"
+  },
+  "nav.contact": {
+   "hi": "संपर्क",
+   "en": "Contact"
+  },
+  "nav.gallery": {
+   "hi": "झलकियाँ",
+   "en": "Gallery"
+  },
+  "nav.blog": {
+   "hi": "ब्लॉग",
+   "en": "Blog"
+  },
+  "search.btn": {
+   "hi": "सम्राट योद्धा फाउंडेशन के बारे में जानें",
+   "en": "Learn about सम्राट योद्धा फाउंडेशन"
+  },
+  "hero.h1": {
+   "hi": "सम्राट योद्धा <span>फाउंडेशन</span>",
+   "en": ""
+  },
+  "slogan": {
+   "hi": "शिक्षित बनो <b>★</b> संगठित रहो <b>★</b> आगे बढ़ो",
+   "en": "Educate <b>★</b> Organise <b>★</b> Move forward"
+  },
+  "hero.lead": {
+   "hi": "हम गाँव-गाँव में पाठशालाएँ चलाकर बच्चों और युवाओं तक अच्छी पढ़ाई, हुनर और संविधान की समझ पहुँचाते हैं।",
+   "en": "We run pathshalas village by village, bringing good education, skills and an understanding of the Constitution to children and young people."
+  },
+  "hero.find": {
+   "hi": "अपने ज़िले का कोचिंग सेंटर खोजें",
+   "en": "Find a coaching centre in your district"
+  },
+  "join.cta": {
+   "hi": "ज्वाइन सम्राट योद्धा फाउंडेशन",
+   "en": "Join सम्राट योद्धा फाउंडेशन"
+  },
+  "stats.h2": {
+   "hi": "अब तक की उपलब्धियाँ",
+   "en": "Our achievements so far"
+  },
+  "stats.note": {
+   "hi": "गाँव-गाँव में चल रही हमारी पाठशालाओं में बच्चे और युवा रोज़ शिक्षा, हुनर और संविधान की समझ से जुड़ रहे हैं। आप भी इस सफ़र का हिस्सा बनें — <a href=\"#join\">हमसे जुड़ें</a>।",
+   "en": "In our village pathshalas, children and young people connect every day with education, skills and an understanding of the Constitution. Be part of this journey — <a href=\"#join\">join us</a>."
+  },
+  "about.h2": {
+   "hi": "पहले शिक्षा, फिर समाज में बदलाव",
+   "en": "Education first, then change in society"
+  },
+  "about.lead": {
+   "hi": "सम्राट योद्धा फाउंडेशन शिक्षा के क्षेत्र में काम करता है। हमारा लक्ष्य है कि हर गाँव के बच्चे और युवा को अच्छी पढ़ाई, हुनर और सही मार्गदर्शन मिले।",
+   "en": "सम्राट योद्धा फाउंडेशन works in education. Our goal is that every child and young person in every village gets good education, skills and the right guidance."
+  },
+  "about.p": {
+   "hi": "हमारा मानना है कि युवा की सबसे बड़ी ताकत उसका ज्ञान, उसकी योग्यता और उसका सफल भविष्य है। पहले स्वयं शिक्षित बनें, योग्यता बढ़ाएँ, फिर उसी ज्ञान से समाज को आगे बढ़ाएँ।",
+   "en": "We believe a young person’s greatest strength is their knowledge, their ability and a successful future. First educate yourself and build your ability, then use that knowledge to take society forward."
+  },
+  "insp.h3": {
+   "hi": "प्रेरणा: भारत रत्न डॉ. भीमराव आंबेडकर",
+   "en": "Inspiration: Bharat Ratna Dr. Bhimrao Ambedkar"
+  },
+  "insp.p": {
+   "hi": "उनसे प्रेरणा का अर्थ है शिक्षा, तर्क, अधिकारों की समझ, संवैधानिक रास्ते और समानता व न्याय के लिए लगातार प्रयास।",
+   "en": "Drawing inspiration from him means education, reason, an understanding of rights, constitutional paths, and constant effort for equality and justice."
+  },
+  "plan.h3": {
+   "hi": "हमारी 8 सूत्री कार्य-योजना",
+   "en": "Our 8-point action plan"
+  },
+  "plan.1.t": {
+   "hi": "शिक्षा को प्राथमिकता",
+   "en": "Education first"
+  },
+  "plan.1.d": {
+   "hi": "हर काम की शुरुआत पढ़ाई और योग्यता से।",
+   "en": "Every effort begins with learning and ability."
+  },
+  "plan.2.t": {
+   "hi": "प्रतियोगी परीक्षाओं की तैयारी",
+   "en": "Competitive exam preparation"
+  },
+  "plan.2.d": {
+   "hi": "सरकारी के साथ निजी क्षेत्र और दूसरे रोज़गार की जानकारी।",
+   "en": "Information on government, private-sector and other jobs."
+  },
+  "plan.3.t": {
+   "hi": "कौशल विकास",
+   "en": "Skill development"
+  },
+  "plan.3.d": {
+   "hi": "कंप्यूटर, तकनीकी शिक्षा, संचार कौशल और व्यावसायिक प्रशिक्षण।",
+   "en": "Computers, technical education, communication skills and vocational training."
+  },
+  "plan.4.t": {
+   "hi": "कानूनी जागरूकता",
+   "en": "Legal awareness"
+  },
+  "plan.4.d": {
+   "hi": "संवैधानिक अधिकार, कर्तव्य और शांतिपूर्ण विरोध के तरीके।",
+   "en": "Constitutional rights, duties and ways of peaceful protest."
+  },
+  "plan.5.t": {
+   "hi": "ज़िम्मेदार नेतृत्व",
+   "en": "Responsible leadership"
+  },
+  "plan.5.d": {
+   "hi": "भीड़ नहीं, समाधान की ठोस योजना।",
+   "en": "Not crowds, but a concrete plan for solutions."
+  },
+  "plan.6.t": {
+   "hi": "शांतिपूर्ण लोकतांत्रिक रास्ते",
+   "en": "Peaceful democratic paths"
+  },
+  "plan.6.d": {
+   "hi": "ज्ञापन, जनसुनवाई, संवाद और कानूनी सहायता।",
+   "en": "Memorandums, public hearings, dialogue and legal aid."
+  },
+  "plan.7.t": {
+   "hi": "युवाओं के समय का सम्मान",
+   "en": "Respect for young people’s time"
+  },
+  "plan.7.d": {
+   "hi": "हर अभियान ऐसा हो कि पढ़ाई और परीक्षा पर असर न पड़े।",
+   "en": "Every campaign should leave studies and exams unaffected."
+  },
+  "plan.8.t": {
+   "hi": "हर काम की समीक्षा",
+   "en": "Review every effort"
+  },
+  "plan.8.d": {
+   "hi": "क्या मिला, क्या कमी रही, आगे बेहतर कैसे करें।",
+   "en": "What we achieved, what fell short, and how to do better."
+  },
+  "courses.h2": {
+   "hi": "छह पाठ्यक्रम: बचपन की पढ़ाई से रोज़गार तक",
+   "en": "Six courses: from early learning to employment"
+  },
+  "courses.lead": {
+   "hi": "हर पाठशाला में ज़रूरत के हिसाब से ये पाठ्यक्रम चलते हैं। प्रवेश की जानकारी के लिए पाठ्यक्रम के नीचे दिए लिंक से हमें WhatsApp करें।",
+   "en": "These courses run in each pathshala as needed. For admission details, message us on WhatsApp using the link under each course."
+  },
+  "courses.swipe": {
+   "hi": "उँगली से बगल में खिसकाकर सभी 6 पाठ्यक्रम देखें →",
+   "en": "Swipe sideways to see all 6 courses →"
+  },
+  "gal.h2": {
+   "hi": "झलकियाँ",
+   "en": "Glimpses"
+  },
+  "gal.lead": {
+   "hi": "हमारी पाठशालाओं, कार्यक्रमों और अभियानों की कुछ तस्वीरें और वीडियो।",
+   "en": "Some photos and videos from our pathshalas, programmes and campaigns."
+  },
+  "schools.h2": {
+   "hi": "अपने ज़िले में हमारी पाठशाला और कोचिंग सेंटर",
+   "en": "Our pathshalas and coaching centres in your district"
+  },
+  "f.state": {
+   "hi": "राज्य",
+   "en": "State"
+  },
+  "f.district": {
+   "hi": "ज़िला",
+   "en": "District"
+  },
+  "blogt.h2": {
+   "hi": "हमारे ब्लॉग",
+   "en": "Our blog"
+  },
+  "blogt.all": {
+   "hi": "सभी ब्लॉग पढ़ें →",
+   "en": "Read all posts →"
+  },
+  "join.h2": {
+   "hi": "ज्वाइन सम्राट योद्धा फाउंडेशन",
+   "en": "Join सम्राट योद्धा फाउंडेशन"
+  },
+  "join.lead": {
+   "hi": "शिक्षा का यह काम आप जैसे साथियों से ही आगे बढ़ता है। इनमें से किसी भी तरह जुड़ सकते हैं:",
+   "en": "This work in education moves forward with companions like you. You can join in any of these ways:"
+  },
+  "way.1.t": {
+   "hi": "शिक्षक बनें",
+   "en": "Become a teacher"
+  },
+  "way.1.d": {
+   "hi": "अपने गाँव की पाठशाला में बच्चों को पढ़ाएँ।",
+   "en": "Teach children at your village pathshala."
+  },
+  "way.2.t": {
+   "hi": "स्वयंसेवक बनें",
+   "en": "Become a volunteer"
+  },
+  "way.2.d": {
+   "hi": "कार्यक्रमों, सर्वे और अभियानों में हाथ बँटाएँ।",
+   "en": "Help with events, surveys and campaigns."
+  },
+  "way.3.t": {
+   "hi": "अपने गाँव में पाठशाला खुलवाएँ",
+   "en": "Start a pathshala in your village"
+  },
+  "way.3.d": {
+   "hi": "जगह और बच्चों की जानकारी दें, बाकी हम मिलकर करेंगे।",
+   "en": "Share details of a space and the children; we will do the rest together."
+  },
+  "way.4.t": {
+   "hi": "सदस्य बनें",
+   "en": "Become a member"
+  },
+  "way.4.d": {
+   "hi": "फाउंडेशन की गतिविधियों से जुड़े रहें।",
+   "en": "Stay connected with the foundation’s activities."
+  },
+  "j.name": {
+   "hi": "आपका नाम",
+   "en": "Your name"
+  },
+  "j.mobile": {
+   "hi": "मोबाइल नंबर",
+   "en": "Mobile number"
+  },
+  "j.district": {
+   "hi": "ज़िला",
+   "en": "District"
+  },
+  "j.village": {
+   "hi": "गाँव",
+   "en": "Village"
+  },
+  "j.how": {
+   "hi": "कैसे जुड़ना चाहते हैं",
+   "en": "How would you like to join?"
+  },
+  "j.opt1": {
+   "hi": "शिक्षक बनना",
+   "en": "Become a teacher"
+  },
+  "j.opt2": {
+   "hi": "स्वयंसेवक बनना",
+   "en": "Become a volunteer"
+  },
+  "j.opt3": {
+   "hi": "अपने गाँव में पाठशाला खुलवाना",
+   "en": "Start a pathshala in my village"
+  },
+  "j.opt4": {
+   "hi": "सदस्य बनना",
+   "en": "Become a member"
+  },
+  "j.work": {
+   "hi": "आप क्या करते हैं",
+   "en": "What do you do?"
+  },
+  "j.w0": {
+   "hi": "चुनें",
+   "en": "Choose"
+  },
+  "j.w1": {
+   "hi": "पढ़ाई (छात्र / छात्रा)",
+   "en": "Studying (student)"
+  },
+  "j.w2": {
+   "hi": "नौकरी",
+   "en": "Job"
+  },
+  "j.w3": {
+   "hi": "व्यवसाय",
+   "en": "Business"
+  },
+  "j.w4": {
+   "hi": "खेती-किसानी",
+   "en": "Farming"
+  },
+  "j.w5": {
+   "hi": "गृहिणी",
+   "en": "Homemaker"
+  },
+  "j.w6": {
+   "hi": "अन्य",
+   "en": "Other"
+  },
+  "j.submit": {
+   "hi": "आगे बढ़ें",
+   "en": "Continue"
+  },
+  "j.ready": {
+   "hi": "आपका संदेश तैयार है। नीचे का बटन WhatsApp खोलेगा, वहाँ भेजें दबाइए।",
+   "en": "Your message is ready. The button below opens WhatsApp; tap Send there."
+  },
+  "j.send": {
+   "hi": "WhatsApp पर भेजें",
+   "en": "Send on WhatsApp"
+  },
+  "don.h2": {
+   "hi": "आपका सहयोग, किसी गाँव के बच्चे की पढ़ाई",
+   "en": "Your support, a village child’s education"
+  },
+  "don.lead": {
+   "hi": "पाठशालाएँ आप जैसे लोगों के सहयोग से चलती हैं। किताब, कॉपी या पेन-पेंसिल जैसा छोटा-सा सामान भी किसी बच्चे की पढ़ाई आगे बढ़ाता है।",
+   "en": "Our pathshalas run with the support of people like you. Even something small, like a book, a notebook or a pen and pencil, helps a child’s education move forward."
+  },
+  "use.1": {
+   "hi": "किताबें, कॉपी और पढ़ाई का सामान",
+   "en": "Books, notebooks and study materials"
+  },
+  "use.2": {
+   "hi": "पाठशालाओं का रोज़ का संचालन",
+   "en": "Day-to-day running of pathshalas"
+  },
+  "use.3": {
+   "hi": "प्रतियोगी परीक्षा की तैयारी",
+   "en": "Competitive exam preparation"
+  },
+  "use.4": {
+   "hi": "कंप्यूटर और कौशल प्रशिक्षण",
+   "en": "Computer and skills training"
+  },
+  "d.what": {
+   "hi": "आप बच्चों के लिए क्या देना चाहते हैं?",
+   "en": "What would you like to give the children?"
+  },
+  "d.multi": {
+   "hi": "एक से ज़्यादा चीज़ें चुन सकते हैं।",
+   "en": "You can choose more than one."
+  },
+  "d.i1": {
+   "hi": "किताबें",
+   "en": "Books"
+  },
+  "d.i2": {
+   "hi": "कॉपी",
+   "en": "Notebooks"
+  },
+  "d.i3": {
+   "hi": "पेन और पेंसिल",
+   "en": "Pens and pencils"
+  },
+  "d.i4": {
+   "hi": "स्टेशनरी सामान",
+   "en": "Stationery"
+  },
+  "d.i5": {
+   "hi": "अन्य",
+   "en": "Others"
+  },
+  "d.other": {
+   "hi": "और क्या देना चाहते हैं?",
+   "en": "What else would you like to give?"
+  },
+  "d.qr.cap": {
+   "hi": "PhonePe, Google Pay, Paytm या BHIM, किसी भी UPI ऐप से यह QR कोड स्कैन करके दान करें।",
+   "en": "Scan this QR code with any UPI app, such as PhonePe, Google Pay, Paytm or BHIM, to donate."
+  },
+  "d.upi": {
+   "hi": "UPI ऐप से दान करें",
+   "en": "Donate with a UPI app"
+  },
+  "d.btn": {
+   "hi": "WhatsApp पर हमारी टीम से संपर्क करें",
+   "en": "Contact our team on WhatsApp"
+  },
+  "d.contact": {
+   "hi": "या Facebook / ईमेल से संपर्क करें",
+   "en": "Or contact us on Facebook / by email"
+  },
+  "d.note": {
+   "hi": "आपका चुना हुआ सामान WhatsApp संदेश में अपने आप लिख जाएगा। हमारी टीम आपसे बात करके सामान पहुँचाने का तरीका बताएगी।",
+   "en": "The items you choose are written into the WhatsApp message automatically. Our team will talk to you and explain how to send them."
+  },
+  "contact.h2": {
+   "hi": "संपर्क करें",
+   "en": "Contact us"
+  },
+  "c.email": {
+   "hi": "ईमेल",
+   "en": "Email"
+  },
+  "foot.org": {
+   "hi": "सम्राट योद्धा फाउंडेशन",
+   "en": "सम्राट योद्धा फाउंडेशन"
+  },
+  "foot.by": {
+   "hi": "संस्थापक: शिवम मौर्य जी",
+   "en": "Founder: Shivam Maurya Ji"
+  },
+  "foot.tag": {
+   "hi": "शिक्षा ही शक्ति है।",
+   "en": "Education is power."
+  },
+  "foot.web": {
+   "hi": "वेबसाइट",
+   "en": "Website"
+  },
+  "foot.join": {
+   "hi": "साथ आइए",
+   "en": "Get involved"
+  },
+  "foot.copy": {
+   "hi": "सम्राट योद्धा फाउंडेशन",
+   "en": "सम्राट योद्धा फाउंडेशन"
+  },
+  "search.close": {
+   "hi": "बंद करें",
+   "en": "Close"
+  },
+  "logo.alt": {
+   "hi": "सम्राट योद्धा फाउंडेशन का लोगो",
+   "en": "सम्राट योद्धा फाउंडेशन logo"
+  },
+  "nav.aria": {
+   "hi": "मुख्य मेनू",
+   "en": "Main menu"
+  },
+  "sl.label": {
+   "hi": "सम्राट योद्धा फाउंडेशन की झलकियाँ",
+   "en": "Highlights of सम्राट योद्धा फाउंडेशन"
+  },
+  "logo.big.alt": {
+   "hi": "सम्राट योद्धा फाउंडेशन का गोल लोगो: अशोक स्तंभ, किताब और विद्यार्थी",
+   "en": "Round logo of सम्राट योद्धा फाउंडेशन: Ashoka pillar, book and students"
+  },
+  "sl.prev": {
+   "hi": "पिछली स्लाइड",
+   "en": "Previous slide"
+  },
+  "sl.next": {
+   "hi": "अगली स्लाइड",
+   "en": "Next slide"
+  },
+  "j.mobile.ph": {
+   "hi": "10 अंकों का नंबर",
+   "en": "10-digit number"
+  },
+  "d.other.ph": {
+   "hi": "जैसे स्कूल बैग, ड्रॉइंग का सामान",
+   "en": "e.g. school bags, drawing materials"
+  },
+  "foot.aria": {
+   "hi": "फ़ुटर लिंक",
+   "en": "Footer links"
+  },
+  "search.title": {
+   "hi": "वेबसाइट में खोजें",
+   "en": "Search the website"
+  },
+  "search.ph": {
+   "hi": "खोजें: पाठशाला, दान, पाठ्यक्रम, ज़िला…",
+   "en": "Search: pathshala, donation, courses, district…"
+  },
+  "meta.desc": {
+   "hi": "सम्राट योद्धा फाउंडेशन गाँव-गाँव में पाठशालाएँ चलाकर बच्चों और युवाओं तक शिक्षा, हुनर और संविधान की समझ पहुँचाता है। अपने ज़िले की पाठशाला खोजें, हमसे जुड़ें, ब्लॉग पढ़ें या दान करें।",
+   "en": "सम्राट योद्धा फाउंडेशन runs pathshalas in villages, bringing education, skills and an understanding of the Constitution to children and young people."
+  },
+  "title": {
+   "hi": "सम्राट योद्धा फाउंडेशन | शिक्षा ही शक्ति है",
+   "en": "सम्राट योद्धा फाउंडेशन | Education is Power"
+  }
+ },
+ "people": [
+  {
+   "name": "शिवम मौर्य जी",
+   "name_en": "Shivam Maurya Ji",
+   "role": "संस्थापक, सम्राट योद्धा फाउंडेशन",
+   "role_en": "Founder, सम्राट योद्धा फाउंडेशन",
+   "about": "शिवम मौर्य जी ने सम्राट योद्धा फाउंडेशन की शुरुआत इस सोच के साथ की कि युवा की सबसे बड़ी ताकत उसका ज्ञान, उसकी योग्यता और उसका सफल भविष्य है। उनकी अगुवाई में फाउंडेशन गाँव-गाँव में पाठशालाएँ और कोचिंग सेंटर चलाकर बच्चों और युवाओं को शिक्षा, हुनर और संविधान की समझ से जोड़ रहा है।",
+   "about_en": "Shivam Maurya Ji started सम्राट योद्धा फाउंडेशन with the belief that a young person’s greatest strength is their knowledge, their ability and a successful future. Under his leadership, the foundation runs pathshalas and coaching centres in villages, connecting children and young people with education, skills and an understanding of the Constitution.",
+   "photo": "images/shivam.jpg"
+  },
+  {
+   "name": "",
+   "name_en": "",
+   "role": "",
+   "role_en": "",
+   "about": "",
+   "about_en": "",
+   "photo": ""
+  },
+  {
+   "name": "",
+   "name_en": "",
+   "role": "",
+   "role_en": "",
+   "about": "",
+   "about_en": "",
+   "photo": ""
+  },
+  {
+   "name": "",
+   "name_en": "",
+   "role": "",
+   "role_en": "",
+   "about": "",
+   "about_en": "",
+   "photo": ""
+  },
+  {
+   "name": "",
+   "name_en": "",
+   "role": "",
+   "role_en": "",
+   "about": "",
+   "about_en": "",
+   "photo": ""
+  },
+  {
+   "name": "",
+   "name_en": "",
+   "role": "",
+   "role_en": "",
+   "about": "",
+   "about_en": "",
+   "photo": ""
+  },
+  {
+   "name": "",
+   "name_en": "",
+   "role": "",
+   "role_en": "",
+   "about": "",
+   "about_en": "",
+   "photo": ""
+  },
+  {
+   "name": "",
+   "name_en": "",
+   "role": "",
+   "role_en": "",
+   "about": "",
+   "about_en": "",
+   "photo": ""
+  },
+  {
+   "name": "",
+   "name_en": "",
+   "role": "",
+   "role_en": "",
+   "about": "",
+   "about_en": "",
+   "photo": ""
+  },
+  {
+   "name": "",
+   "name_en": "",
+   "role": "",
+   "role_en": "",
+   "about": "",
+   "about_en": "",
+   "photo": ""
+  },
+  {
+   "name": "",
+   "name_en": "",
+   "role": "",
+   "role_en": "",
+   "about": "",
+   "about_en": "",
+   "photo": ""
+  }
+ ],
+ "courses": [
+  {
+   "n": "बुनियादी पढ़ाई",
+   "w": "कक्षा 1 से 8 के बच्चे",
+   "p": [
+    "हिंदी, गणित और अंग्रेज़ी की मज़बूत नींव",
+    "रोज़ पढ़ने-लिखने की आदत",
+    "स्कूल के गृहकार्य में मदद"
+   ],
+   "n_en": "Basic studies",
+   "w_en": "Children in classes 1 to 8",
+   "p_en": [
+    "A strong foundation in Hindi, maths and English",
+    "A daily habit of reading and writing",
+    "Help with school homework"
+   ]
+  },
+  {
+   "n": "प्रतियोगी परीक्षा की तैयारी",
+   "w": "10वीं और 12वीं के बाद के युवा",
+   "p": [
+    "सामान्य ज्ञान, गणित और तर्कशक्ति",
+    "सरकारी और निजी नौकरियों की जानकारी",
+    "नियमित अभ्यास टेस्ट"
+   ],
+   "n_en": "Competitive exam preparation",
+   "w_en": "Young people who have finished class 10 or 12",
+   "p_en": [
+    "General knowledge, maths and reasoning",
+    "Information on government and private jobs",
+    "Regular practice tests"
+   ]
+  },
+  {
+   "n": "कंप्यूटर और तकनीकी शिक्षा",
+   "w": "कक्षा 6 से ऊपर के छात्र और युवा",
+   "p": [
+    "कंप्यूटर की बुनियादी जानकारी और टाइपिंग",
+    "इंटरनेट और ऑनलाइन फ़ॉर्म भरना",
+    "डिजिटल सुरक्षा"
+   ],
+   "n_en": "Computer and technical education",
+   "w_en": "Students from class 6 upwards and young people",
+   "p_en": [
+    "Computer basics and typing",
+    "Using the internet and filling in online forms",
+    "Digital safety"
+   ]
+  },
+  {
+   "n": "संचार कौशल और व्यक्तित्व विकास",
+   "w": "किशोर और युवा",
+   "p": [
+    "साफ़ बोलना और लिखना",
+    "इंटरव्यू की तैयारी",
+    "आत्मविश्वास और नेतृत्व"
+   ],
+   "n_en": "Communication skills and personality development",
+   "w_en": "Teenagers and young people",
+   "p_en": [
+    "Speaking and writing clearly",
+    "Interview preparation",
+    "Confidence and leadership"
+   ]
+  },
+  {
+   "n": "कानूनी और संवैधानिक जागरूकता",
+   "w": "युवा और अभिभावक",
+   "p": [
+    "संविधान, मौलिक अधिकार और कर्तव्य",
+    "ज्ञापन और जनसुनवाई जैसे शांतिपूर्ण रास्ते",
+    "कानूनी सहायता कहाँ मिलती है"
+   ],
+   "n_en": "Legal and constitutional awareness",
+   "w_en": "Young people and parents",
+   "p_en": [
+    "The Constitution, fundamental rights and duties",
+    "Peaceful routes such as memorandums and public hearings",
+    "Where to get legal aid"
+   ]
+  },
+  {
+   "n": "व्यावसायिक प्रशिक्षण",
+   "w": "रोज़गार चाहने वाले युवा",
+   "p": [
+    "रोज़गार से जुड़े हुनर",
+    "स्वरोज़गार की जानकारी",
+    "सही करियर चुनने में मार्गदर्शन"
+   ],
+   "n_en": "Vocational training",
+   "w_en": "Young people looking for work",
+   "p_en": [
+    "Job-related skills",
+    "Information on self-employment",
+    "Guidance in choosing the right career"
+   ]
+  }
+ ],
+ "courseTags": {
+  "बुनियादी पढ़ाई": "Basic studies",
+  "प्रतियोगी परीक्षा": "Competitive exams",
+  "कंप्यूटर": "Computers",
+  "संचार कौशल": "Communication skills",
+  "कानूनी जागरूकता": "Legal awareness",
+  "व्यावसायिक प्रशिक्षण": "Vocational training"
+ },
+ "pathshalas": [],
+ "gallery": []
+}
