@@ -21,14 +21,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Mukta:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../css/style.css?v=20261126105312">
+<link rel="stylesheet" href="../css/style.css?v=20261126144828">
 </head>
 <body class="blogpage">
-<header class="nav">
-  <a class="brand" href="../"><img src="../images/logo.webp" alt="सम्राट योद्धा फाउंडेशन का लोगो"><span>सम्राट योद्धा<small>फाउंडेशन</small></span></a>
-  <a class="btn gold" href="../#donate">दान करें</a>
-  <div class="bar2"><nav class="links" aria-label="मुख्य मेनू"><a href="../#about">हमारे बारे में</a><a href="../#courses">पाठ्यक्रम</a><a href="../#schools">पाठशालाएँ</a><a href="../blogs/" aria-current="page">ब्लॉग</a><a href="../#join">जुड़ें</a><a href="../#contact">संपर्क</a></nav></div>
+<header class="nav" id="nav">
+  <a class="brand" href="../"><img src="../images/logo.webp" alt="सम्राट योद्धा फाउंडेशन का लोगो" width="44" height="44"><span>सम्राट योद्धा<small>फाउंडेशन</small></span></a>
+  <nav class="menu" id="menu" aria-label="मुख्य मेनू"><a class="mhome" href="../"><svg class="mi" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.2 12 3.8l9 7.4V20a1 1 0 0 1-1 1h-5.2v-6.2H9.2V21H4a1 1 0 0 1-1-1z"/></svg><span>होम</span></a><a href="../#about">हमारे बारे में</a><a href="../#programs">कार्यक्रम</a><a href="../#schools">पाठशालाएँ</a><a href="../blogs/" aria-current="page">ब्लॉग</a><a href="../#contact">संपर्क</a></nav>
+  <div class="ntools"><a class="btn gold donate" href="../#donate"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.5 8 3.4 4.6 6.8 4.6c2.1 0 3.6 1.2 5.2 3.1 1.6-1.9 3.1-3.1 5.2-3.1 3.4 0 5.3 3.4 4.1 6.7-1.8 4.6-9.3 9.2-9.3 9.2z"/></svg><span>दान करें</span></a><button class="mbtn" id="mbtn" type="button" aria-controls="menu" aria-expanded="false" aria-label="मेनू"><i></i><i></i><i></i></button></div>
 </header>
+<script>(function(){var b=document.getElementById("mbtn");b.addEventListener("click",function(e){e.stopPropagation();var o=!document.body.classList.contains("menu-open");document.body.classList.toggle("menu-open",o);b.setAttribute("aria-expanded",String(o));});document.addEventListener("click",function(e){if(!e.target.closest("#nav")){document.body.classList.remove("menu-open");b.setAttribute("aria-expanded","false");}});})();</script>
 <main>
 <section class="band blogtop"><div class="wrap"><nav class="crumbs" aria-label="आप यहाँ हैं"><a href="../">मुख्य पेज</a> › <span>ब्लॉग</span></nav><h1>सम्राट योद्धा फाउंडेशन का ब्लॉग</h1><p class="lead">शिक्षा, संगठन, संविधान और युवाओं के भविष्य पर हमारे विचार, अनुभव और गाँव-गाँव की पाठशालाओं की खबरें।</p></div></section>
 <section class="band"><div class="wrap"><p class="lead">जल्द ही यहाँ नए ब्लॉग आएँगे।</p></div></section>

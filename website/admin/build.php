@@ -49,6 +49,46 @@ function gallery_html(array $items): string {
     return $out;
 }
 
+
+/* प्रमुख कार्यक्रमों के निशान (एडमिन में इन्हीं में से चुनें) */
+const PROGRAM_ICONS = [
+    'book' => '<path d="M2.5 5.5c3-1 6.3-.8 9.5 1.2 3.2-2 6.5-2.2 9.5-1.2v13c-3-1-6.3-.8-9.5 1.2-3.2-2-6.5-2.2-9.5-1.2zM12 6.7v13"/>',
+    'teacher' => '<rect x="9" y="3.5" width="12" height="9" rx="1"/><path d="M13 9.5l3-2.5M5.5 9a2.2 2.2 0 1 0 0-4.4A2.2 2.2 0 0 0 5.5 9zM2 21v-5.5c0-2 1.6-3.6 3.5-3.6S9 13.5 9 15.5V21M9 12.5h3"/>',
+    'people' => '<circle cx="7" cy="8" r="2.6"/><circle cx="17" cy="8" r="2.6"/><circle cx="12" cy="10.5" r="2.8"/><path d="M2.5 18c.4-2.6 2.2-4.2 4.5-4.2M21.5 18c-.4-2.6-2.2-4.2-4.5-4.2M6.5 20.5c.5-3 2.7-4.8 5.5-4.8s5 1.8 5.5 4.8"/>',
+    'sprout' => '<path d="M12 21v-9M12 12c0-4.2-3-6.5-7.5-6.5 0 4.2 3 6.5 7.5 6.5zM12 14.5c0-4.2 3-6.5 7.5-6.5 0 4.2-3 6.5-7.5 6.5z"/>',
+    'layers' => '<path d="M12 3.5 21 8l-9 4.5L3 8zM3 12l9 4.5 9-4.5M3 16l9 4.5 9-4.5"/>',
+    'star' => '<path d="M12 3.2l2.6 5.5 6 .8-4.4 4.1 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.5l6-.8z"/>',
+    'heart' => '<path d="M12 20.5s-7.5-4.6-9.3-9.2C1.5 8 3.4 4.6 6.8 4.6c2.1 0 3.6 1.2 5.2 3.1 1.6-1.9 3.1-3.1 5.2-3.1 3.4 0 5.3 3.4 4.1 6.7-1.8 4.6-9.3 9.2-9.3 9.2z"/>',
+    'laptop' => '<rect x="4" y="5" width="16" height="10.5" rx="1.2"/><path d="M2 19h20"/>',
+    'scale' => '<path d="M12 3.5V20M6 20h12M4.5 7h15M7 7l-3 6.5a3 3 0 0 0 6 0zM17 7l-3 6.5a3 3 0 0 0 6 0z"/>',
+    'pen' => '<path d="M4 20l1-4.5L16 4.5l3.5 3.5L8.5 19zM14 7l3.5 3.5"/>',
+];
+const PROGRAM_COLORS = ['purple' => 'बैंगनी', 'orange' => 'नारंगी', 'gold' => 'सुनहरा', 'green' => 'हरा', 'maroon' => 'मरून', 'blue' => 'नीला'];
+function home_defaults(array $c): array {
+    return array_merge(['founderImg' => '', 'kids' => '', 'heroes' => [], 'programs' => []], $c['home'] ?? []);
+}
+function programs_html(array $items): string {
+    $out = '';
+    foreach ($items as $p) {
+        if (trim($p['t'] ?? '') === '') continue;
+        $icon = PROGRAM_ICONS[$p['icon'] ?? ''] ?? PROGRAM_ICONS['star'];
+        $col = isset(PROGRAM_COLORS[$p['color'] ?? '']) ? $p['color'] : 'maroon';
+        $sub = trim($p['s'] ?? '') !== '' ? '<small>(' . bi($p['s'], trim($p['s_en'] ?? '')) . ')</small>' : '';
+        $out .= '<div class="prog"><span class="picon c-' . $col . '"><svg viewBox="0 0 24 24" aria-hidden="true">' . $icon . '</svg></span><h3>' . bi($p['t'], trim($p['t_en'] ?? '')) . '</h3>' . $sub . '</div>';
+    }
+    return $out;
+}
+function heroes_html(array $items): string {
+    $one = '';
+    foreach ($items as $i => $h) {
+        if (empty($h['img'])) continue;
+        $name = trim($h['name'] ?? '');
+        $one .= '<span class="pf"><img src="' . h($h['img']) . '" alt="' . h($name) . '"' . ($name !== '' ? ' title="' . h($name) . '"' : '') . ' width="125" height="160"></span>';
+    }
+    if ($one === '') return '';
+    return '<span class="pset">' . $one . '</span><span class="pset dup" aria-hidden="true">' . $one . '</span>';
+}
+
 /* ---------- मुख्य पेज (index.html) ---------- */
 function render_index(array $c, array $posts, string $V): string {
     $tpl = file_get_contents(__DIR__ . '/tpl/index.tpl.html');
@@ -59,7 +99,13 @@ function render_index(array $c, array $posts, string $V): string {
     $t['founder.av'] = ['hi' => h(first_grapheme($f['name'] ?? '')), 'en' => h(first_grapheme($f['name_en'] ?? ''))];
     $gallery = gallery_html($c['gallery'] ?? []);
     $pub = published_posts($posts);
-    $flags = ['gallery' => $gallery !== '', 'posts' => count($pub) > 0];
+    $home = home_defaults($c);
+    $heroes = heroes_html($home['heroes']);
+    $programs = programs_html($home['programs']);
+    $flags = ['gallery' => $gallery !== '', 'posts' => count($pub) > 0, 'heroes' => $heroes !== '', 'programs' => $programs !== ''];
+    $fImg = $home['founderImg'] ?: ($f['photo'] ?? '') ?: 'images/logo.webp';
+    $kids = $home['kids'] ? '<figure class="hx-kids"><img src="' . h($home['kids']) . '" alt="' . h(plain($t['hero.kidsAlt']['hi'] ?? '')) . '" data-i-alt="hero.kidsAlt" width="322" height="290"></figure>' : '';
+    $fen = trim($f['name_en'] ?? '') !== '' ? '<span class="fen" lang="en">(' . h($f['name_en']) . ')</span>' : '';
     $tpl = preg_replace_callback('/<!--IF:(\w+)-->(.*?)<!--\/IF:\1-->/s', fn($m) => !empty($flags[$m[1]]) ? $m[2] : '', $tpl);
     $url = site_url($c);
     $sameAs = array_values(array_filter([$c['config']['facebook'] ?? '']));
@@ -71,7 +117,8 @@ function render_index(array $c, array $posts, string $V): string {
     $cards = implode('', array_map(fn($p) => post_card($p, ''), array_slice($pub, 0, 3)));
     $vals = ['V' => $V, 'SITE_URL' => h($url), 'OG_IMAGE' => h(abs_url($c, $c['config']['ogImage'] ?? 'images/share.jpg')),
         'GSV' => $gsv !== '' ? '<meta name="google-site-verification" content="' . h($gsv) . "\">\n" : '', 'JSONLD' => $ld,
-        'GALLERY_ITEMS' => $gallery, 'BLOG_CARDS' => $cards];
+        'GALLERY_ITEMS' => $gallery, 'BLOG_CARDS' => $cards, 'HEROES' => $heroes, 'PROGRAMS' => $programs,
+        'FOUNDER_IMG' => h($fImg), 'FOUNDER_EN' => $fen, 'KIDS' => $kids];
     return preg_replace_callback('/\{\{(?:(t|a):)?([A-Za-z0-9_.]+)\}\}/', function ($m) use ($t, $vals) {
         if ($m[1] === 't') return $t[$m[2]]['hi'] ?? '';
         if ($m[1] === 'a') return h(plain($t[$m[2]]['hi'] ?? ''));
@@ -103,7 +150,7 @@ function render_site_data(array $c): string {
 function blog_shell(array $c, array $o): string {
     $p = $o['prefix']; $V = $o['V']; $url = site_url($c);
     $gsv = trim($c['site']['gsv'] ?? '');
-    $nav = '<a href="' . $p . '#about">हमारे बारे में</a><a href="' . $p . '#courses">पाठ्यक्रम</a><a href="' . $p . '#schools">पाठशालाएँ</a><a href="' . $p . 'blogs/" aria-current="' . ($o['list'] ? 'page' : 'false') . '">ब्लॉग</a><a href="' . $p . '#join">जुड़ें</a><a href="' . $p . '#contact">संपर्क</a>';
+    $nav = '<a class="mhome" href="' . $p . '"><svg class="mi" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.2 12 3.8l9 7.4V20a1 1 0 0 1-1 1h-5.2v-6.2H9.2V21H4a1 1 0 0 1-1-1z"/></svg><span>होम</span></a><a href="' . $p . '#about">हमारे बारे में</a><a href="' . $p . '#programs">कार्यक्रम</a><a href="' . $p . '#schools">पाठशालाएँ</a><a href="' . $p . 'blogs/"' . ($o['list'] ? ' aria-current="page"' : '') . '>ब्लॉग</a><a href="' . $p . '#contact">संपर्क</a>';
     return '<!DOCTYPE html>
 <html lang="hi">
 <head>
@@ -129,11 +176,12 @@ function blog_shell(array $c, array $o): string {
 <link rel="stylesheet" href="' . $p . 'css/style.css?v=' . $V . '">
 </head>
 <body class="blogpage">
-<header class="nav">
-  <a class="brand" href="' . $p . '"><img src="' . $p . 'images/logo.webp" alt="सम्राट योद्धा फाउंडेशन का लोगो"><span>सम्राट योद्धा<small>फाउंडेशन</small></span></a>
-  <a class="btn gold" href="' . $p . '#donate">दान करें</a>
-  <div class="bar2"><nav class="links" aria-label="मुख्य मेनू">' . $nav . '</nav></div>
+<header class="nav" id="nav">
+  <a class="brand" href="' . $p . '"><img src="' . $p . 'images/logo.webp" alt="सम्राट योद्धा फाउंडेशन का लोगो" width="44" height="44"><span>सम्राट योद्धा<small>फाउंडेशन</small></span></a>
+  <nav class="menu" id="menu" aria-label="मुख्य मेनू">' . $nav . '</nav>
+  <div class="ntools"><a class="btn gold donate" href="' . $p . '#donate"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.5 8 3.4 4.6 6.8 4.6c2.1 0 3.6 1.2 5.2 3.1 1.6-1.9 3.1-3.1 5.2-3.1 3.4 0 5.3 3.4 4.1 6.7-1.8 4.6-9.3 9.2-9.3 9.2z"/></svg><span>दान करें</span></a><button class="mbtn" id="mbtn" type="button" aria-controls="menu" aria-expanded="false" aria-label="मेनू"><i></i><i></i><i></i></button></div>
 </header>
+<script>(function(){var b=document.getElementById("mbtn");b.addEventListener("click",function(e){e.stopPropagation();var o=!document.body.classList.contains("menu-open");document.body.classList.toggle("menu-open",o);b.setAttribute("aria-expanded",String(o));});document.addEventListener("click",function(e){if(!e.target.closest("#nav")){document.body.classList.remove("menu-open");b.setAttribute("aria-expanded","false");}});})();</script>
 <main>
 ' . $o['body'] . '
 </main>

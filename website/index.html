@@ -24,62 +24,79 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Mukta:wght@400;600;700&display=swap" rel="stylesheet">
 <!-- यह पेज एडमिन पैनल अपने आप बनाता है। यहाँ सीधे बदलाव न करें, वे अगली बार मिट जाएँगे। -->
-<link rel="stylesheet" href="css/style.css?v=20261126105312">
+<link rel="stylesheet" href="css/style.css?v=20261126144828">
 <!-- पिछली बार चुनी गई भाषा अंग्रेज़ी हो तो पेज खुलते समय हिंदी की झलक न दिखे -->
 <script>try{if(localStorage.getItem('syf-lang')==='en'){document.documentElement.className+=' en-wait';setTimeout(function(){document.documentElement.classList.remove('en-wait')},1500)}}catch(e){}</script>
 </head>
 <body>
-<header class="nav">
-  <a class="brand" href="#top"><img src="images/logo.webp" alt="सम्राट योद्धा फाउंडेशन का लोगो" data-i-alt="logo.alt"><span data-i="brand">सम्राट योद्धा<small>फाउंडेशन</small></span></a>
-  <div class="lang" role="group" aria-label="भाषा चुनें / Choose language">
-    <button type="button" data-lang="hi" aria-pressed="true" lang="hi"><span class="long">हिंदी</span><span class="short">हिं</span></button>
-    <button type="button" data-lang="en" aria-pressed="false" lang="en"><span class="long">English</span><span class="short">EN</span></button>
-  </div>
-  <a class="btn gold" href="#donate" data-i="donate">दान करें</a>
-  <div class="bar2">
-  <nav class="links" aria-label="मुख्य मेनू" data-i-aria="nav.aria">
-    <a href="#work" data-i="nav.work">उपलब्धियाँ</a><a href="#about" data-i="nav.about">हमारे बारे में</a><a href="#courses" data-i="nav.courses">पाठ्यक्रम</a><a href="#schools" data-i="nav.schools">पाठशालाएँ</a><a href="#join" data-i="nav.join">जुड़ें</a><a href="#contact" data-i="nav.contact">संपर्क</a><a href="blogs/" data-i="nav.blog">ब्लॉग</a>
+
+<div class="prerna" role="img" aria-label="हमारे प्रेरणा स्रोत" data-i-aria="heroes.label"><div class="ptrack"><span class="pset"><span class="pf"><img src="images/prerna-01.jpg" alt="" width="125" height="160"></span><span class="pf"><img src="images/prerna-02.jpg" alt="" width="125" height="160"></span><span class="pf"><img src="images/prerna-03.jpg" alt="" width="125" height="160"></span><span class="pf"><img src="images/prerna-04.jpg" alt="" width="125" height="160"></span><span class="pf"><img src="images/prerna-05.jpg" alt="" width="125" height="160"></span><span class="pf"><img src="images/prerna-06.jpg" alt="" width="125" height="160"></span><span class="pf"><img src="images/prerna-07.jpg" alt="" width="125" height="160"></span><span class="pf"><img src="images/prerna-08.jpg" alt="" width="125" height="160"></span><span class="pf"><img src="images/prerna-09.jpg" alt="" width="125" height="160"></span><span class="pf"><img src="images/prerna-10.jpg" alt="" width="125" height="160"></span></span><span class="pset dup" aria-hidden="true"><span class="pf"><img src="images/prerna-01.jpg" alt="" width="125" height="160"></span><span class="pf"><img src="images/prerna-02.jpg" alt="" width="125" height="160"></span><span class="pf"><img src="images/prerna-03.jpg" alt="" width="125" height="160"></span><span class="pf"><img src="images/prerna-04.jpg" alt="" width="125" height="160"></span><span class="pf"><img src="images/prerna-05.jpg" alt="" width="125" height="160"></span><span class="pf"><img src="images/prerna-06.jpg" alt="" width="125" height="160"></span><span class="pf"><img src="images/prerna-07.jpg" alt="" width="125" height="160"></span><span class="pf"><img src="images/prerna-08.jpg" alt="" width="125" height="160"></span><span class="pf"><img src="images/prerna-09.jpg" alt="" width="125" height="160"></span><span class="pf"><img src="images/prerna-10.jpg" alt="" width="125" height="160"></span></span></div></div>
+
+<header class="nav" id="nav">
+  <a class="brand" href="#top"><img src="images/logo.webp" alt="सम्राट योद्धा फाउंडेशन का लोगो" data-i-alt="logo.alt" width="44" height="44"><span data-i="brand">सम्राट योद्धा<small>फाउंडेशन</small></span></a>
+  <nav class="menu" id="menu" aria-label="मुख्य मेनू" data-i-aria="nav.aria">
+    <a class="mhome" href="#top" aria-current="page"><svg class="mi" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.2 12 3.8l9 7.4V20a1 1 0 0 1-1 1h-5.2v-6.2H9.2V21H4a1 1 0 0 1-1-1z"/></svg><span data-i="nav.home">होम</span></a>
+    <div class="dd"><button type="button" class="ddb" aria-expanded="false"><span data-i="nav.about">हमारे बारे में</span><svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+      <div class="ddm"><a href="#about" data-i="nav.aboutIntro">परिचय</a><a href="#founder" data-i="nav.founder">संस्थापक</a><a href="#plan" data-i="nav.plan">8 सूत्री कार्य-योजना</a></div></div>
+    <div class="dd"><button type="button" class="ddb" aria-expanded="false"><span data-i="nav.programs">कार्यक्रम</span><svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+      <div class="ddm"><a href="#programs" data-i="nav.progMain">प्रमुख कार्यक्रम</a><a href="#courses" data-i="nav.courses">पाठ्यक्रम</a><a href="#schools" data-i="nav.schools">पाठशालाएँ</a><a href="#join" data-i="nav.join">जुड़ें</a></div></div>
+    <a href="#work" data-i="nav.work">उपलब्धियाँ</a>
+    <div class="dd"><button type="button" class="ddb" aria-expanded="false"><span data-i="nav.media">मीडिया</span><svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+      <div class="ddm"><a href="blogs/" data-i="nav.blog">ब्लॉग</a></div></div>
+    <a href="#contact" data-i="nav.contact">संपर्क</a>
   </nav>
-    <button class="sbtn" id="sOpen" type="button" aria-haspopup="dialog" aria-label="सम्राट योद्धा फाउंडेशन के बारे में जानें" data-i-aria="search.btn"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M20 20l-4.6-4.6"/></svg><span data-i="search.btn">सम्राट योद्धा फाउंडेशन के बारे में जानें</span></button>
+  <div class="ntools">
+    <button class="sbtn" id="sOpen" type="button" aria-haspopup="dialog" aria-label="सम्राट योद्धा फाउंडेशन के बारे में जानें" data-i-aria="search.btn" title="सम्राट योद्धा फाउंडेशन के बारे में जानें"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M20 20l-4.6-4.6"/></svg></button>
+    <div class="lang" role="group" aria-label="भाषा चुनें / Choose language"><button type="button" data-lang="hi" aria-pressed="true" lang="hi">हिंदी</button><span class="sep" aria-hidden="true"></span><button type="button" data-lang="en" aria-pressed="false" lang="en">EN</button></div>
+    <a class="btn gold donate" href="#donate"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.5 8 3.4 4.6 6.8 4.6c2.1 0 3.6 1.2 5.2 3.1 1.6-1.9 3.1-3.1 5.2-3.1 3.4 0 5.3 3.4 4.1 6.7-1.8 4.6-9.3 9.2-9.3 9.2z"/></svg><span data-i="donate">दान करें</span></a>
+    <button class="mbtn" id="mbtn" type="button" aria-controls="menu" aria-expanded="false" aria-label="मेनू" data-i-aria="nav.menu"><i></i><i></i><i></i></button>
   </div>
 </header>
 
 <section class="hero" id="top" aria-roledescription="carousel" aria-label="सम्राट योद्धा फाउंडेशन की झलकियाँ" data-i-aria="sl.label">
   <div class="slides" id="slides">
-    <div class="slide" role="group" aria-roledescription="slide">
+    <div class="slide main" role="group" aria-roledescription="slide">
       <div class="band">
-        <div class="wrap hgrid">
-          <div class="ht">
+        <div class="wrap hx">
+          <div class="hx-logo"><img src="images/logo.webp" alt="सम्राट योद्धा फाउंडेशन का गोल लोगो: अशोक स्तंभ, किताब और विद्यार्थी" data-i-alt="logo.big.alt" width="380" height="380"></div>
+          <div class="hx-main">
             <h1 data-i="hero.h1">सम्राट योद्धा <span>फाउंडेशन</span></h1>
-            <p class="slogan" data-i="slogan">शिक्षित बनो <b>★</b> संगठित रहो <b>★</b> आगे बढ़ो</p>
-          </div>
-          <div class="emblem">
-            <svg id="rays" viewBox="-100 -100 200 200" aria-hidden="true"></svg>
-            <img src="images/logo.webp" alt="सम्राट योद्धा फाउंडेशन का गोल लोगो: अशोक स्तंभ, किताब और विद्यार्थी" data-i-alt="logo.big.alt">
-          </div>
-          <div class="hb">
-            <p class="lead" data-i="hero.lead">हम गाँव-गाँव में पाठशालाएँ चलाकर बच्चों और युवाओं तक अच्छी पढ़ाई, हुनर और संविधान की समझ पहुँचाते हैं।</p>
+            <p class="slogan ribbon" data-i="slogan">शिक्षित बनो <b>★</b> संगठित रहो <b>★</b> आगे बढ़ो</p>
+            <p class="lead" data-i="hero.lead">हम गाँव-गाँव में पाठशालाओं के माध्यम से बच्चों और युवाओं तक गुणवत्तापूर्ण शिक्षा, हुनर, वैज्ञानिक सोच और संविधान की समझ पहुँचाने के लिए कार्यरत हैं।</p>
             <div class="acts">
-              <a class="btn gold" href="#schools" data-i="hero.find">अपने ज़िले का कोचिंग सेंटर खोजें</a>
-              <a class="btn line" href="#join" data-i="join.cta">ज्वाइन सम्राट योद्धा फाउंडेशन</a>
+              <a class="btn gold" href="#schools"><svg class="bi" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 5.5c3-1 6.3-.8 9.5 1.2 3.2-2 6.5-2.2 9.5-1.2v13c-3-1-6.3-.8-9.5 1.2-3.2-2-6.5-2.2-9.5-1.2zM12 6.7v13"/></svg><span data-i="hero.btn1">पाठशाला से जुड़ें</span><span class="arr" aria-hidden="true">→</span></a>
+              <a class="btn line" href="#join"><svg class="bi" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 19c.6-3.3 3-5.2 6-5.2s5.4 1.9 6 5.2"/><circle cx="17" cy="9" r="2.6"/><path d="M16.2 13.9c2.4.2 4.2 1.8 4.8 4.6"/></svg><span data-i="hero.btn2">स्वयंसेवक बनें</span><span class="arr" aria-hidden="true">→</span></a>
             </div>
           </div>
+          <figure class="hx-founder">
+            <img src="images/founder-hero.jpg" alt="शिवम मौर्य जी" width="640" height="800">
+            <figcaption><small data-i="hero.founderLbl">संस्थापक</small><b data-i="founder.name">शिवम मौर्य जी</b><span class="fen" lang="en">(Shivam Maurya Ji)</span></figcaption>
+          </figure>
+          <figure class="hx-kids"><img src="images/hero-kids.jpg" alt="पाठशाला में किताब पढ़ते बच्चे" data-i-alt="hero.kidsAlt" width="322" height="290"></figure>
         </div>
       </div>
     </div>
   </div>
-  <div class="slnav" id="slnav">
+  <div class="slnav" id="slnav" hidden>
     <button class="slbtn" id="slPrev" type="button" aria-label="पिछली स्लाइड" data-i-aria="sl.prev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
     <div class="dots" id="dots"></div>
     <button class="slbtn" id="slNext" type="button" aria-label="अगली स्लाइड" data-i-aria="sl.next"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
   </div>
 </section>
 
-<section class="stats band" id="work">
+
+<section class="programs" id="programs">
   <div class="wrap">
-    <h2 data-i="stats.h2">अब तक की उपलब्धियाँ</h2>
+    <h2 class="orn"><span data-i="prog.h2">हमारे प्रमुख कार्यक्रम</span></h2>
+    <div class="prgrid"><div class="prog"><span class="picon c-purple"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 5.5c3-1 6.3-.8 9.5 1.2 3.2-2 6.5-2.2 9.5-1.2v13c-3-1-6.3-.8-9.5 1.2-3.2-2-6.5-2.2-9.5-1.2zM12 6.7v13"/></svg></span><h3><span class="l-hi">नि:शुल्क पाठशाला</span><span class="l-en" lang="en">Free pathshalas</span></h3></div><div class="prog"><span class="picon c-orange"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3.5" width="12" height="9" rx="1"/><path d="M13 9.5l3-2.5M5.5 9a2.2 2.2 0 1 0 0-4.4A2.2 2.2 0 0 0 5.5 9zM2 21v-5.5c0-2 1.6-3.6 3.5-3.6S9 13.5 9 15.5V21M9 12.5h3"/></svg></span><h3><span class="l-hi">शिक्षक प्रशिक्षण</span><span class="l-en" lang="en">Teacher training</span></h3></div><div class="prog"><span class="picon c-gold"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7" cy="8" r="2.6"/><circle cx="17" cy="8" r="2.6"/><circle cx="12" cy="10.5" r="2.8"/><path d="M2.5 18c.4-2.6 2.2-4.2 4.5-4.2M21.5 18c-.4-2.6-2.2-4.2-4.5-4.2M6.5 20.5c.5-3 2.7-4.8 5.5-4.8s5 1.8 5.5 4.8"/></svg></span><h3><span class="l-hi">बाल एवं किशोर विकास</span><span class="l-en" lang="en">Child and adolescent development</span></h3></div><div class="prog"><span class="picon c-green"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21v-9M12 12c0-4.2-3-6.5-7.5-6.5 0 4.2 3 6.5 7.5 6.5zM12 14.5c0-4.2 3-6.5 7.5-6.5 0 4.2-3 6.5-7.5 6.5z"/></svg></span><h3><span class="l-hi">बोध</span><span class="l-en" lang="en">Bodh</span></h3><small>(<span class="l-hi">सीखने का स्तरानुकूल</span><span class="l-en" lang="en">learning at the right level</span>)</small></div><div class="prog"><span class="picon c-maroon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5 21 8l-9 4.5L3 8zM3 12l9 4.5 9-4.5M3 16l9 4.5 9-4.5"/></svg></span><h3><span class="l-hi">पंचकोश विकास</span><span class="l-en" lang="en">Panchakosha development</span></h3><small>(<span class="l-hi">शारीरिक, मानसिक, बौद्धिक, भावनात्मक, नैतिक</span><span class="l-en" lang="en">physical, mental, intellectual, emotional, moral</span>)</small></div></div>
+  </div>
+</section>
+
+
+<section class="stats" id="work">
+  <div class="wrap">
+    <h2 class="sr" data-i="stats.h2">अब तक की उपलब्धियाँ</h2>
     <div class="sgrid" id="sgrid"></div>
-    <p class="note" data-i="stats.note">गाँव-गाँव में चल रही हमारी पाठशालाओं में बच्चे और युवा रोज़ शिक्षा, हुनर और संविधान की समझ से जुड़ रहे हैं। आप भी इस सफ़र का हिस्सा बनें — <a href="#join">हमसे जुड़ें</a>।</p>
   </div>
 </section>
 
@@ -93,12 +110,12 @@
         <h3 data-i="insp.h3">प्रेरणा: भारत रत्न डॉ. भीमराव आंबेडकर</h3>
         <p style="margin:8px 0 0" data-i="insp.p">उनसे प्रेरणा का अर्थ है शिक्षा, तर्क, अधिकारों की समझ, संवैधानिक रास्ते और समानता व न्याय के लिए लगातार प्रयास।</p>
       </div>
-      <div class="founder">
+      <div class="founder" id="founder">
         <div class="av" aria-hidden="true" data-i="founder.av">शि</div>
         <div><b data-i="founder.name">शिवम मौर्य जी</b><span data-i="founder.role">संस्थापक, सम्राट योद्धा फाउंडेशन</span></div>
       </div>
     </div>
-    <div class="plan">
+    <div class="plan" id="plan">
       <h3 data-i="plan.h3">हमारी 8 सूत्री कार्य-योजना</h3>
       <ol>
         <li><b data-i="plan.1.t">शिक्षा को प्राथमिकता</b><span data-i="plan.1.d">हर काम की शुरुआत पढ़ाई और योग्यता से।</span></li>
@@ -251,10 +268,10 @@
   </div>
 </div>
 
-<script src="js/districts.js?v=20261126105312"></script>
-<script src="js/site-data.js?v=20261126105312"></script>
-<script src="js/lang.js?v=20261126105312"></script>
-<script src="js/qr.js?v=20261126105312"></script>
-<script src="js/app.js?v=20261126105312"></script>
+<script src="js/districts.js?v=20261126144828"></script>
+<script src="js/site-data.js?v=20261126144828"></script>
+<script src="js/lang.js?v=20261126144828"></script>
+<script src="js/qr.js?v=20261126144828"></script>
+<script src="js/app.js?v=20261126144828"></script>
 </body>
 </html>

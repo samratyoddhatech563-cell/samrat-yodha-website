@@ -64,8 +64,8 @@
   if (!CONFIG.sampleData) document.querySelectorAll('.sample').forEach(el => el.remove());
 
   /* पहले हिस्से की किरणें */
-  const R = 170;
-  $('rays').innerHTML = Array.from({ length: 24 }, (_, i) => {
+  const R = 170, raysEl = $('rays');
+  if (raysEl) raysEl.innerHTML = Array.from({ length: 24 }, (_, i) => {
     const a = (i * 15) * Math.PI / 180, b = (i * 15 + 7.5) * Math.PI / 180;
     return `<path d="M0 0L${(R * Math.cos(a)).toFixed(1)} ${(R * Math.sin(a)).toFixed(1)}L${(R * Math.cos(b)).toFixed(1)} ${(R * Math.sin(b)).toFixed(1)}Z"/>`;
   }).join('');
@@ -88,7 +88,7 @@
   function renderPeople() {
     const keep = slideIdx;
     slidesEl.querySelectorAll('.slide.person').forEach(n => n.remove());
-    people().forEach(p => {
+    people().slice(1).forEach(p => {   // पहला व्यक्ति (संस्थापक) पहली स्लाइड पर ही दिखता है
       const name = L(p, 'name'), role = L(p, 'role'), about = L(p, 'about');
       const el = document.createElement('div');
       el.className = 'slide person'; el.setAttribute('role', 'group'); el.setAttribute('aria-roledescription', 'slide');
@@ -135,7 +135,15 @@
       [uniq(P.map(p => p.s + '|' + p.d + '|' + p.v)).length, T('sVill')],
       [uniq(P.map(p => p.t)).length, T('sTeach')]
     ];
-    $('sgrid').innerHTML = S.map(([n, l]) => `<div class="stat"><b data-n="${n}">${fmt(n)}</b><span>${l}</span></div>`).join('');
+    const ICON = {
+      [T('sSchools')]: '<path d="M3 10.5 12 4l9 6.5M5 9.5V20h14V9.5M9.5 20v-5.5h5V20"/>',
+      [T('sCenters')]: '<rect x="4" y="4.5" width="16" height="11" rx="1.2"/><path d="M8 20h8M12 15.5V20"/>',
+      [T('sKids')]: '<circle cx="12" cy="6.5" r="3"/><path d="M4.5 13c2.6-1.3 5.1-1.3 7.5.4 2.4-1.7 4.9-1.7 7.5-.4v7c-2.6-1.3-5.1-1.3-7.5.4-2.4-1.7-4.9-1.7-7.5-.4zM12 13.4v7"/>',
+      [T('sDist')]: '<path d="M12 21s-6.5-6.2-6.5-11a6.5 6.5 0 0 1 13 0c0 4.8-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4"/>',
+      [T('sVill')]: '<path d="M2.5 20h19M4 20v-7l5-4 5 4v7M14 20v-9.5l3.5-2.8 3 2.4V20M8 20v-3.5h2V20"/>',
+      [T('sTeach')]: '<circle cx="9" cy="8" r="3.2"/><path d="M3 19.5c.6-3.3 3-5.2 6-5.2s5.4 1.9 6 5.2"/><circle cx="17" cy="9" r="2.6"/><path d="M16.2 13.9c2.4.2 4.2 1.8 4.8 4.6"/>'
+    };
+    $('sgrid').innerHTML = S.map(([n, l]) => `<div class="stat"><svg class="sico" viewBox="0 0 24 24" aria-hidden="true">${ICON[l] || ICON[T('sTeach')]}</svg><div><b data-n="${n}">${fmt(n)}</b><span>${l}</span></div></div>`).join('');
   }
 
   /* ---------- पाठ्यक्रम ---------- */
@@ -259,7 +267,7 @@
     document.querySelectorAll('.course').forEach(c => add({ kind: T('kPage'), t: txt(c.querySelector('h3')), s: txt(c.querySelector('.who')) + ' · ' + [...c.querySelectorAll('li')].map(txt).join(', '), el: () => c }));
     document.querySelectorAll('.insp').forEach(x => { const h = x.querySelector('h3, b'); add({ kind: T('kPage'), t: txt(h), s: txt(x).replace(txt(h), '').trim(), el: () => x }); });
     document.querySelectorAll('.ci').forEach(x => add({ kind: T('kPage'), t: txt(x.querySelector('b')), s: txt(x.querySelector('em')), k: 'contact sampark संपर्क', run: () => { flash($('contact')); } }));
-    people().forEach((p, i) => add({ kind: T('kPage'), t: L(p, 'name'), s: [L(p, 'role'), L(p, 'about')].filter(Boolean).join(' · '), k: [p.name, p.name_en, p.role, p.role_en].join(' '), w: 2, run: () => { flash($('top')); goTo(i + 1); } }));
+    people().forEach((p, i) => add({ kind: T('kPage'), t: L(p, 'name'), s: [L(p, 'role'), L(p, 'about')].filter(Boolean).join(' · '), k: [p.name, p.name_en, p.role, p.role_en].join(' '), w: 2, run: () => { flash($('top')); goTo(i); } }));
     P.forEach(p => {
       const st = stateOf(p.s) || {}, dd = (st.d || []).find(x => x.n === p.d) || {};
       const a = [p.v, p.v_en, p.b, p.b_en, p.t, p.t_en, p.d, p.s, dd.en, st.en, typeLabel(p)].join(' ');
@@ -343,12 +351,19 @@
   });
 
   /* ---------- पूरी वेबसाइट चुनी गई भाषा में दिखाएँ ---------- */
-  /* मेनू की पट्टी: आगे और लिंक हों तो दाईं ओर धुंधलापन */
-  const linksEl = document.querySelector('.links');
-  const fadeLinks = () => linksEl.classList.toggle('more', linksEl.scrollWidth - linksEl.clientWidth - linksEl.scrollLeft > 4);
-  linksEl.addEventListener('scroll', fadeLinks, { passive: true });
-  window.addEventListener('resize', fadeLinks);
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fadeLinks);
+  /* ---------- मेनू: नीचे खुलने वाली सूचियाँ और फ़ोन का मेनू बटन ---------- */
+  const menuEl = $('menu'), mbtn = $('mbtn'), ddbs = [...document.querySelectorAll('.ddb')];
+  const closeDd = except => ddbs.forEach(b => { if (b !== except) b.setAttribute('aria-expanded', 'false'); });
+  const setMenu = open => { document.body.classList.toggle('menu-open', open); mbtn.setAttribute('aria-expanded', String(open)); if (!open) closeDd(); };
+  ddbs.forEach(b => b.addEventListener('click', e => {
+    e.stopPropagation();
+    const open = b.getAttribute('aria-expanded') !== 'true';
+    closeDd(b); b.setAttribute('aria-expanded', String(open));
+  }));
+  mbtn.addEventListener('click', e => { e.stopPropagation(); setMenu(!document.body.classList.contains('menu-open')); });
+  menuEl.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
+  document.addEventListener('click', e => { if (!e.target.closest('#nav')) { closeDd(); setMenu(false); } });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeDd(); setMenu(false); } });
   /* फ़ोन पर नीचे स्क्रॉल करते समय ऊपर की पट्टी छिपे, ऊपर स्क्रॉल करते ही वापस आए */
   const navEl = document.querySelector('.nav');
   let lastY = window.scrollY, navRaf = 0;
@@ -358,7 +373,7 @@
       navRaf = 0;
       const y = window.scrollY, dy = y - lastY;
       if (Math.abs(dy) < 8) return;
-      navEl.classList.toggle('nav-up', dy > 0 && y > 160 && !navEl.contains(document.activeElement));
+      navEl.classList.toggle('nav-up', dy > 0 && y > 260 && !navEl.contains(document.activeElement) && !document.body.classList.contains('menu-open'));
       lastY = y;
     });
   }, { passive: true });
@@ -374,7 +389,6 @@
     $('jerr').textContent = '';
     $('jres').hidden = true;
     if (!sModal.hidden) { index = buildIndex(); runSearch(); }
-    fadeLinks();
   }
   document.querySelector('.lang').addEventListener('click', e => {
     const b = e.target.closest('button[data-lang]');

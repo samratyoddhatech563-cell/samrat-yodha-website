@@ -23,6 +23,40 @@ function media_ok($p): string {
     return preg_match('~^(/uploads/\d{4}/\d{2}/[A-Za-z0-9._-]+|images/[A-Za-z0-9._-]+)$~', $p) ? $p : '';
 }
 function rows_in(string $k): array { $v = $_POST[$k] ?? []; return is_array($v) ? array_values(array_filter($v, 'is_array')) : []; }
+/* GitHub से आया नया कोड (_deploy/website) — डेटा और अपलोड छुए बिना लगाना */
+function pending_update(): string {
+    $src = ROOT . '/_deploy/website';
+    if (!is_file($src . '/VERSION')) return '';
+    $new = trim((string)file_get_contents($src . '/VERSION'));
+    $cur = is_file(ROOT . '/VERSION') ? trim((string)file_get_contents(ROOT . '/VERSION')) : '';
+    return ($new !== '' && $new !== $cur) ? $new : '';
+}
+function apply_update(): string {
+    $src = realpath(ROOT . '/_deploy/website');
+    if (!$src || !is_file($src . '/VERSION')) throw new RuntimeException('नया कोड नहीं मिला');
+    $skipTop = ['data', 'uploads', 'blogs'];
+    $skipFiles = ['index.html', 'sitemap.xml', 'robots.txt', 'js/site-data.js'];
+    $it = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($src, FilesystemIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST);
+    $n = 0;
+    foreach ($it as $f) {
+        $rel = str_replace('\\', '/', substr($f->getPathname(), strlen($src) + 1));
+        if (in_array(explode('/', $rel)[0], $skipTop, true) || in_array($rel, $skipFiles, true) || strpos($rel, '..') !== false) continue;
+        $dst = ROOT . '/' . $rel;
+        if ($f->isDir()) { if (!is_dir($dst)) mkdir($dst, 0755, true); continue; }
+        write_atomic($dst, (string)file_get_contents($f->getPathname())); $n++;
+    }
+    /* नई लिखावट/हिस्से जोड़ें, पर पैनल में बदली हुई जानकारी वैसी ही रहे */
+    $new = json_decode((string)@file_get_contents($src . '/data/content.json'), true);
+    if (is_array($new)) {
+        $c = data_load('content.json');
+        foreach ($new as $k => $v) if (!array_key_exists($k, $c)) $c[$k] = $v;
+        foreach ($new['texts'] ?? [] as $k => $v) if (!isset($c['texts'][$k])) $c['texts'][$k] = $v;
+        if (isset($new['home']) && is_array($c['home'] ?? null)) foreach ($new['home'] as $k => $v) if (!array_key_exists($k, $c['home'])) $c['home'][$k] = $v;
+        data_save('content.json', $c);
+    }
+    build_site();
+    return $n . ' फ़ाइलें';
+}
 function lines_in($v): array { return array_values(array_filter(array_map(fn($x) => plain_in($x, 300), explode("\n", is_string($v) ? $v : '')), fn($x) => $x !== '')); }
 
 /* ---------- अपलोड (पेज के अंदर से, JSON जवाब) ---------- */
@@ -166,6 +200,26 @@ if ($isPost) {
                     if ($x['s'] !== '' && $x['d'] !== '') $out[] = $x;
                 }
                 $c['pathshalas'] = $out; data_save('content.json', $c); rebuild_or_flash('पाठशालाओं की सूची सहेज ली।'); go('pathshalas');
+            case 'homepage':
+                $home = home_defaults($c);
+                $home['founderImg'] = media_ok($_POST['founderImg'] ?? '');
+                $home['kids'] = media_ok($_POST['kids'] ?? '');
+                $out = [];
+                foreach (rows_in('items') as $r) {
+                    $img = media_ok($r['img'] ?? '');
+                    if ($img !== '') $out[] = ['img' => $img, 'name' => plain_in($r['name'] ?? '', 100), 'name_en' => plain_in($r['name_en'] ?? '', 100)];
+                }
+                $home['heroes'] = $out; $c['home'] = $home;
+                data_save('content.json', $c); rebuild_or_flash('होम पेज की फ़ोटो सहेज लीं।'); go('homepage');
+            case 'programs':
+                $home = home_defaults($c); $out = [];
+                foreach (rows_in('items') as $r) {
+                    $x = ['t' => plain_in($r['t'] ?? '', 80), 't_en' => plain_in($r['t_en'] ?? '', 80), 's' => plain_in($r['s'] ?? '', 160), 's_en' => plain_in($r['s_en'] ?? '', 160),
+                        'icon' => isset(PROGRAM_ICONS[$r['icon'] ?? '']) ? $r['icon'] : 'star', 'color' => isset(PROGRAM_COLORS[$r['color'] ?? '']) ? $r['color'] : 'maroon'];
+                    if ($x['t'] !== '') $out[] = $x;
+                }
+                $home['programs'] = $out; $c['home'] = $home;
+                data_save('content.json', $c); rebuild_or_flash('प्रमुख कार्यक्रम सहेज लिए।'); go('programs');
             case 'gallery':
                 $out = [];
                 foreach (rows_in('items') as $r) {
@@ -212,6 +266,9 @@ if ($isPost) {
                 elseif ($p1 !== $p2) flash('दोनों नए पासवर्ड एक जैसे नहीं हैं।', false);
                 else { $auth = ['hash' => password_hash($p1, PASSWORD_DEFAULT), 'created' => time()]; data_save('auth.php', $auth); login_as($auth); flash('पासवर्ड बदल गया।'); }
                 go('password');
+            case 'apply-update':
+                if (pending_update() === '') { flash('कोई नया अपडेट नहीं है।'); go('home'); }
+                $r = apply_update(); flash('नया अपडेट लग गया (' . $r . ')। आपकी जानकारी, फ़ोटो और ब्लॉग वैसे ही हैं।'); go('home');
             case 'rebuild':
                 rebuild_or_flash('वेबसाइट दोबारा बना दी।'); go('home');
         }
@@ -226,7 +283,7 @@ function page_top(string $title, bool $menu = true, string $active = ''): void {
         . '<meta name="csrf" content="' . h(csrf_token()) . '"><meta name="upmax" content="' . upload_limit_mb() . '">'
         . '<title>' . h($title) . ' | एडमिन | सम्राट योद्धा फाउंडेशन</title><link rel="icon" href="../images/favicon.png"><link rel="stylesheet" href="assets/admin.css?v=3"></head><body>';
     if ($menu) {
-        $items = ['home' => 'डैशबोर्ड', 'texts' => 'लिखावट', 'contact' => 'संपर्क व अंक', 'people' => 'स्लाइडर के लोग', 'courses' => 'पाठ्यक्रम', 'pathshalas' => 'पाठशालाएँ', 'gallery' => 'फ़ोटो-वीडियो गैलरी', 'posts' => 'ब्लॉग', 'media' => 'अपलोड फ़ाइलें', 'password' => 'पासवर्ड'];
+        $items = ['home' => 'डैशबोर्ड', 'homepage' => 'होम पेज की फ़ोटो', 'programs' => 'प्रमुख कार्यक्रम', 'texts' => 'लिखावट', 'contact' => 'संपर्क व अंक', 'people' => 'स्लाइडर के लोग', 'courses' => 'पाठ्यक्रम', 'pathshalas' => 'पाठशालाएँ', 'gallery' => 'फ़ोटो-वीडियो गैलरी', 'posts' => 'ब्लॉग', 'media' => 'अपलोड फ़ाइलें', 'password' => 'पासवर्ड'];
         echo '<header class="top"><a class="logo" href="./"><img src="../images/logo.webp" alt="" width="40" height="40"><span>एडमिन पैनल</span></a><details class="menu"><summary>मेनू</summary><nav>';
         foreach ($items as $k => $v) echo '<a href="./?p=' . $k . '"' . ($k === $active ? ' aria-current="page"' : '') . '>' . h($v) . '</a>';
         echo '<a href="../" target="_blank" rel="noopener">वेबसाइट देखें ↗</a><form method="post" action="./?p=logout">' . csrf_field() . '<button>लॉगआउट</button></form></nav></details></header>';
@@ -244,8 +301,8 @@ function field(string $label, string $name, string $value, string $type = 'text'
     if ($type === 'textarea') return '<label>' . h($label) . '<textarea name="' . h($name) . '" rows="3"' . $extra . '>' . h($value) . '</textarea></label>';
     return '<label>' . h($label) . '<input type="' . $type . '" name="' . h($name) . '" value="' . h($value) . '"' . $extra . '></label>';
 }
-function repeater(string $title, string $hint, array $rows, callable $render, string $addLabel): void {
-    echo '<form method="post" class="rep-form">' . csrf_field() . '<h1>' . h($title) . '</h1><p class="muted">' . $hint . '</p><div class="rep">';
+function repeater(string $title, string $hint, array $rows, callable $render, string $addLabel, string $top = ''): void {
+    echo '<form method="post" class="rep-form">' . csrf_field() . '<h1>' . h($title) . '</h1><p class="muted">' . $hint . '</p>' . $top . '<div class="rep">';
     foreach ($rows as $i => $r) echo '<fieldset class="row"><div class="rowbar"><b class="num"></b><span><button type="button" class="ico up" title="ऊपर करें">↑</button><button type="button" class="ico down" title="नीचे करें">↓</button><button type="button" class="ico del" title="हटाएँ">✕</button></span></div>' . $render('items[' . $i . ']', $r) . '</fieldset>';
     echo '</div><template class="rowtpl"><fieldset class="row"><div class="rowbar"><b class="num"></b><span><button type="button" class="ico up" title="ऊपर करें">↑</button><button type="button" class="ico down" title="नीचे करें">↓</button><button type="button" class="ico del" title="हटाएँ">✕</button></span></div>' . $render('items[__N__]', []) . '</fieldset></template>'
         . '<button type="button" class="btn ghost add">+ ' . h($addLabel) . '</button><div class="savebar"><button class="btn">सहेजें और वेबसाइट पर लगाएँ</button></div></form>';
@@ -257,7 +314,7 @@ case 'texts':
     page_top('लिखावट', true, 'texts');
     $groups = [
         'Google और ब्राउज़र टैब' => ['title', 'meta.'], 'ऊपर की पट्टी और मेनू' => ['brand', 'logo.', 'nav.', 'donate', 'search.'],
-        'सबसे ऊपर का हिस्सा' => ['sl.', 'hero.', 'slogan', 'join.cta'], 'उपलब्धियाँ' => ['stats.'], 'हमारे बारे में और कार्य-योजना' => ['about.', 'insp.', 'plan.'],
+        'सबसे ऊपर का हिस्सा' => ['heroes.', 'sl.', 'hero.', 'slogan', 'join.cta'], 'प्रमुख कार्यक्रम' => ['prog.'], 'उपलब्धियाँ' => ['stats.'], 'हमारे बारे में और कार्य-योजना' => ['about.', 'insp.', 'plan.'],
         'पाठ्यक्रम' => ['courses.'], 'गैलरी' => ['gal.'], 'पाठशालाएँ खोजें' => ['schools.', 'f.'], 'ब्लॉग (मुख्य पेज पर)' => ['blogt.'],
         'जुड़ें' => ['join.', 'j.', 'way.'], 'दान' => ['don.', 'd.', 'use.'], 'संपर्क' => ['contact.', 'c.'], 'फ़ुटर (सबसे नीचे)' => ['foot.']];
     $done = [];
@@ -341,6 +398,30 @@ case 'pathshalas':
     echo '<script src="../js/districts.js"></script>';
     break;
 
+case 'homepage':
+    page_top('होम पेज की फ़ोटो', true, 'homepage');
+    $home = home_defaults($c);
+    $top = '<section class="card"><h2>सबसे ऊपर वाले हिस्से की फ़ोटो</h2><p class="muted">संस्थापक का नाम "स्लाइडर के लोग" में पहले व्यक्ति से आता है।</p>'
+        . media_field('founderImg', $home['founderImg'], 'image', 'संस्थापक की बड़ी फ़ोटो (खड़ी फ़ोटो सबसे अच्छी लगती है)')
+        . media_field('kids', $home['kids'], 'image', 'बाईं ओर नीचे बच्चों की फ़ोटो (हो सके तो अपनी पाठशाला के बच्चों की असली फ़ोटो लगाएँ)') . '</section><h2>सबसे ऊपर की प्रेरणा स्रोतों वाली पट्टी</h2>';
+    repeater('होम पेज की फ़ोटो', 'वेबसाइट खुलते ही दिखने वाली फ़ोटो यहाँ बदलें।', $home['heroes'], function ($n, $r) {
+        return media_field($n . '[img]', $r['img'] ?? '', 'image', 'फ़ोटो') . '<div class="g2">' . field('नाम (माउस ले जाने पर दिखेगा)', $n . '[name]', $r['name'] ?? '') . field('नाम (English)', $n . '[name_en]', $r['name_en'] ?? '') . '</div>';
+    }, 'पट्टी में नई फ़ोटो जोड़ें', $top);
+    break;
+
+case 'programs':
+    page_top('प्रमुख कार्यक्रम', true, 'programs');
+    $home = home_defaults($c);
+    repeater('हमारे प्रमुख कार्यक्रम', 'होम पेज पर सबसे ऊपर वाले हिस्से के ठीक नीचे दिखने वाले कार्ड। हर कार्ड का निशान और रंग चुनें।', $home['programs'], function ($n, $r) {
+        $iconNames = ['book' => 'किताब', 'teacher' => 'शिक्षक', 'people' => 'बच्चे/लोग', 'sprout' => 'पौधा', 'layers' => 'परतें', 'star' => 'तारा', 'heart' => 'दिल', 'laptop' => 'कंप्यूटर', 'scale' => 'न्याय (तराज़ू)', 'pen' => 'कलम'];
+        $ic = ''; foreach ($iconNames as $k => $v) $ic .= '<option value="' . $k . '"' . (($r['icon'] ?? '') === $k ? ' selected' : '') . '>' . $v . '</option>';
+        $co = ''; foreach (PROGRAM_COLORS as $k => $v) $co .= '<option value="' . $k . '"' . (($r['color'] ?? '') === $k ? ' selected' : '') . '>' . $v . '</option>';
+        return '<div class="g2">' . field('कार्यक्रम का नाम', $n . '[t]', $r['t'] ?? '') . field('नाम (English)', $n . '[t_en]', $r['t_en'] ?? '')
+            . field('छोटी बात (कोष्ठक में दिखेगी, न हो तो खाली)', $n . '[s]', $r['s'] ?? '') . field('छोटी बात (English)', $n . '[s_en]', $r['s_en'] ?? '')
+            . '<label>निशान<select name="' . $n . '[icon]">' . $ic . '</select></label><label>रंग<select name="' . $n . '[color]">' . $co . '</select></label></div>';
+    }, 'नया कार्यक्रम जोड़ें');
+    break;
+
 case 'gallery':
     page_top('गैलरी', true, 'gallery');
     repeater('फ़ोटो और वीडियो गैलरी', 'ये फ़ोटो और वीडियो मुख्य पेज के "झलकियाँ" हिस्से में दिखते हैं। गैलरी खाली रहेगी, तो वह हिस्सा नहीं दिखेगा। बड़े वीडियो YouTube पर डालकर उसका लिंक लगाना बेहतर है, इससे वेबसाइट तेज़ चलती है।', $c['gallery'], function ($n, $r) {
@@ -410,11 +491,15 @@ default:
     page_top('डैशबोर्ड', true, 'home');
     $b = data_load('build.json', []);
     $pub = count(published_posts($posts));
-    $cards = ['texts' => ['लिखावट', 'हर हिस्से का हिंदी और English लिखा'], 'contact' => ['संपर्क व अंक', 'WhatsApp, ईमेल, Facebook, उपलब्धियाँ, UPI, Google'],
+    $hm = home_defaults($c);
+    $cards = ['homepage' => ['होम पेज की फ़ोटो', 'संस्थापक, बच्चों और प्रेरणा पट्टी की ' . (count($hm['heroes']) + 2) . ' फ़ोटो'], 'programs' => ['प्रमुख कार्यक्रम', count($hm['programs']) . ' कार्यक्रम'],
+        'texts' => ['लिखावट', 'हर हिस्से का हिंदी और English लिखा'], 'contact' => ['संपर्क व अंक', 'WhatsApp, ईमेल, Facebook, उपलब्धियाँ, UPI, Google'],
         'people' => ['स्लाइडर के लोग', count(array_filter($c['people'], fn($p) => trim($p['name'] ?? '') !== '')) . ' लोग, फ़ोटो के साथ'], 'courses' => ['पाठ्यक्रम', count($c['courses']) . ' पाठ्यक्रम'],
         'pathshalas' => ['पाठशालाएँ', count($c['pathshalas']) . ' पाठशालाएँ/सेंटर'], 'gallery' => ['फ़ोटो-वीडियो गैलरी', count($c['gallery']) . ' फ़ोटो/वीडियो'],
         'posts' => ['ब्लॉग', $pub . ' प्रकाशित, ' . (count($posts) - $pub) . ' ड्राफ़्ट'], 'media' => ['अपलोड फ़ाइलें', count(media_files()) . ' फ़ाइलें']];
-    echo '<div class="headrow"><h1>नमस्ते! 🙏</h1><a class="btn" href="./?p=post">+ नया ब्लॉग लिखें</a></div><div class="dash">';
+    echo '<div class="headrow"><h1>नमस्ते! 🙏</h1><a class="btn" href="./?p=post">+ नया ब्लॉग लिखें</a></div>';
+    if ($up = pending_update()) echo '<section class="card upd"><h2>वेबसाइट का नया अपडेट तैयार है</h2><p class="muted">डिज़ाइन और पैनल का नया कोड आया है। लगाने से आपकी लिखावट, फ़ोटो, ब्लॉग और पासवर्ड नहीं बदलेंगे।</p><form method="post" action="./?p=apply-update">' . csrf_field() . '<button class="btn">अपडेट लगाएँ</button></form></section>';
+    echo '<div class="dash">';
     foreach ($cards as $k => $v) echo '<a class="dcard" href="./?p=' . $k . '"><b>' . h($v[0]) . '</b><span>' . h($v[1]) . '</span></a>';
     echo '</div><section class="card"><h2>Google सर्च में वेबसाइट लाने के लिए</h2><ol class="steps">
 <li>हर हफ़्ते 1–2 ब्लॉग लिखें। हर ब्लॉग का अलग पेज बनता है और वह अपने आप sitemap में जुड़ जाता है।</li>

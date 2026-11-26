@@ -28,57 +28,74 @@
 <script>try{if(localStorage.getItem('syf-lang')==='en'){document.documentElement.className+=' en-wait';setTimeout(function(){document.documentElement.classList.remove('en-wait')},1500)}}catch(e){}</script>
 </head>
 <body>
-<header class="nav">
-  <a class="brand" href="#top"><img src="images/logo.webp" alt="{{a:logo.alt}}" data-i-alt="logo.alt"><span data-i="brand">{{t:brand}}</span></a>
-  <div class="lang" role="group" aria-label="भाषा चुनें / Choose language">
-    <button type="button" data-lang="hi" aria-pressed="true" lang="hi"><span class="long">हिंदी</span><span class="short">हिं</span></button>
-    <button type="button" data-lang="en" aria-pressed="false" lang="en"><span class="long">English</span><span class="short">EN</span></button>
-  </div>
-  <a class="btn gold" href="#donate" data-i="donate">{{t:donate}}</a>
-  <div class="bar2">
-  <nav class="links" aria-label="{{a:nav.aria}}" data-i-aria="nav.aria">
-    <a href="#work" data-i="nav.work">{{t:nav.work}}</a><a href="#about" data-i="nav.about">{{t:nav.about}}</a><a href="#courses" data-i="nav.courses">{{t:nav.courses}}</a><a href="#schools" data-i="nav.schools">{{t:nav.schools}}</a><a href="#join" data-i="nav.join">{{t:nav.join}}</a><a href="#contact" data-i="nav.contact">{{t:nav.contact}}</a><!--IF:gallery--><a href="#gallery" data-i="nav.gallery">{{t:nav.gallery}}</a><!--/IF:gallery--><a href="blogs/" data-i="nav.blog">{{t:nav.blog}}</a>
+<!--IF:heroes-->
+<div class="prerna" role="img" aria-label="{{a:heroes.label}}" data-i-aria="heroes.label"><div class="ptrack">{{HEROES}}</div></div>
+<!--/IF:heroes-->
+<header class="nav" id="nav">
+  <a class="brand" href="#top"><img src="images/logo.webp" alt="{{a:logo.alt}}" data-i-alt="logo.alt" width="44" height="44"><span data-i="brand">{{t:brand}}</span></a>
+  <nav class="menu" id="menu" aria-label="{{a:nav.aria}}" data-i-aria="nav.aria">
+    <a class="mhome" href="#top" aria-current="page"><svg class="mi" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.2 12 3.8l9 7.4V20a1 1 0 0 1-1 1h-5.2v-6.2H9.2V21H4a1 1 0 0 1-1-1z"/></svg><span data-i="nav.home">{{t:nav.home}}</span></a>
+    <div class="dd"><button type="button" class="ddb" aria-expanded="false"><span data-i="nav.about">{{t:nav.about}}</span><svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+      <div class="ddm"><a href="#about" data-i="nav.aboutIntro">{{t:nav.aboutIntro}}</a><a href="#founder" data-i="nav.founder">{{t:nav.founder}}</a><a href="#plan" data-i="nav.plan">{{t:nav.plan}}</a></div></div>
+    <div class="dd"><button type="button" class="ddb" aria-expanded="false"><span data-i="nav.programs">{{t:nav.programs}}</span><svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+      <div class="ddm"><a href="#programs" data-i="nav.progMain">{{t:nav.progMain}}</a><a href="#courses" data-i="nav.courses">{{t:nav.courses}}</a><a href="#schools" data-i="nav.schools">{{t:nav.schools}}</a><a href="#join" data-i="nav.join">{{t:nav.join}}</a></div></div>
+    <a href="#work" data-i="nav.work">{{t:nav.work}}</a>
+    <div class="dd"><button type="button" class="ddb" aria-expanded="false"><span data-i="nav.media">{{t:nav.media}}</span><svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+      <div class="ddm"><!--IF:gallery--><a href="#gallery" data-i="nav.gallery">{{t:nav.gallery}}</a><!--/IF:gallery--><a href="blogs/" data-i="nav.blog">{{t:nav.blog}}</a></div></div>
+    <a href="#contact" data-i="nav.contact">{{t:nav.contact}}</a>
   </nav>
-    <button class="sbtn" id="sOpen" type="button" aria-haspopup="dialog" aria-label="{{a:search.btn}}" data-i-aria="search.btn"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M20 20l-4.6-4.6"/></svg><span data-i="search.btn">{{t:search.btn}}</span></button>
+  <div class="ntools">
+    <button class="sbtn" id="sOpen" type="button" aria-haspopup="dialog" aria-label="{{a:search.btn}}" data-i-aria="search.btn" title="{{a:search.btn}}"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M20 20l-4.6-4.6"/></svg></button>
+    <div class="lang" role="group" aria-label="भाषा चुनें / Choose language"><button type="button" data-lang="hi" aria-pressed="true" lang="hi">हिंदी</button><span class="sep" aria-hidden="true"></span><button type="button" data-lang="en" aria-pressed="false" lang="en">EN</button></div>
+    <a class="btn gold donate" href="#donate"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.5 8 3.4 4.6 6.8 4.6c2.1 0 3.6 1.2 5.2 3.1 1.6-1.9 3.1-3.1 5.2-3.1 3.4 0 5.3 3.4 4.1 6.7-1.8 4.6-9.3 9.2-9.3 9.2z"/></svg><span data-i="donate">{{t:donate}}</span></a>
+    <button class="mbtn" id="mbtn" type="button" aria-controls="menu" aria-expanded="false" aria-label="{{a:nav.menu}}" data-i-aria="nav.menu"><i></i><i></i><i></i></button>
   </div>
 </header>
 
 <section class="hero" id="top" aria-roledescription="carousel" aria-label="{{a:sl.label}}" data-i-aria="sl.label">
   <div class="slides" id="slides">
-    <div class="slide" role="group" aria-roledescription="slide">
+    <div class="slide main" role="group" aria-roledescription="slide">
       <div class="band">
-        <div class="wrap hgrid">
-          <div class="ht">
+        <div class="wrap hx">
+          <div class="hx-logo"><img src="images/logo.webp" alt="{{a:logo.big.alt}}" data-i-alt="logo.big.alt" width="380" height="380"></div>
+          <div class="hx-main">
             <h1 data-i="hero.h1">{{t:hero.h1}}</h1>
-            <p class="slogan" data-i="slogan">{{t:slogan}}</p>
-          </div>
-          <div class="emblem">
-            <svg id="rays" viewBox="-100 -100 200 200" aria-hidden="true"></svg>
-            <img src="images/logo.webp" alt="{{a:logo.big.alt}}" data-i-alt="logo.big.alt">
-          </div>
-          <div class="hb">
+            <p class="slogan ribbon" data-i="slogan">{{t:slogan}}</p>
             <p class="lead" data-i="hero.lead">{{t:hero.lead}}</p>
             <div class="acts">
-              <a class="btn gold" href="#schools" data-i="hero.find">{{t:hero.find}}</a>
-              <a class="btn line" href="#join" data-i="join.cta">{{t:join.cta}}</a>
+              <a class="btn gold" href="#schools"><svg class="bi" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 5.5c3-1 6.3-.8 9.5 1.2 3.2-2 6.5-2.2 9.5-1.2v13c-3-1-6.3-.8-9.5 1.2-3.2-2-6.5-2.2-9.5-1.2zM12 6.7v13"/></svg><span data-i="hero.btn1">{{t:hero.btn1}}</span><span class="arr" aria-hidden="true">→</span></a>
+              <a class="btn line" href="#join"><svg class="bi" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 19c.6-3.3 3-5.2 6-5.2s5.4 1.9 6 5.2"/><circle cx="17" cy="9" r="2.6"/><path d="M16.2 13.9c2.4.2 4.2 1.8 4.8 4.6"/></svg><span data-i="hero.btn2">{{t:hero.btn2}}</span><span class="arr" aria-hidden="true">→</span></a>
             </div>
           </div>
+          <figure class="hx-founder">
+            <img src="{{FOUNDER_IMG}}" alt="{{a:founder.name}}" width="640" height="800">
+            <figcaption><small data-i="hero.founderLbl">{{t:hero.founderLbl}}</small><b data-i="founder.name">{{t:founder.name}}</b>{{FOUNDER_EN}}</figcaption>
+          </figure>
+          {{KIDS}}
         </div>
       </div>
     </div>
   </div>
-  <div class="slnav" id="slnav">
+  <div class="slnav" id="slnav" hidden>
     <button class="slbtn" id="slPrev" type="button" aria-label="{{a:sl.prev}}" data-i-aria="sl.prev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
     <div class="dots" id="dots"></div>
     <button class="slbtn" id="slNext" type="button" aria-label="{{a:sl.next}}" data-i-aria="sl.next"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
   </div>
 </section>
 
-<section class="stats band" id="work">
+<!--IF:programs-->
+<section class="programs" id="programs">
   <div class="wrap">
-    <h2 data-i="stats.h2">{{t:stats.h2}}</h2>
+    <h2 class="orn"><span data-i="prog.h2">{{t:prog.h2}}</span></h2>
+    <div class="prgrid">{{PROGRAMS}}</div>
+  </div>
+</section>
+<!--/IF:programs-->
+
+<section class="stats" id="work">
+  <div class="wrap">
+    <h2 class="sr" data-i="stats.h2">{{t:stats.h2}}</h2>
     <div class="sgrid" id="sgrid"></div>
-    <p class="note" data-i="stats.note">{{t:stats.note}}</p>
   </div>
 </section>
 
@@ -92,12 +109,12 @@
         <h3 data-i="insp.h3">{{t:insp.h3}}</h3>
         <p style="margin:8px 0 0" data-i="insp.p">{{t:insp.p}}</p>
       </div>
-      <div class="founder">
+      <div class="founder" id="founder">
         <div class="av" aria-hidden="true" data-i="founder.av">{{t:founder.av}}</div>
         <div><b data-i="founder.name">{{t:founder.name}}</b><span data-i="founder.role">{{t:founder.role}}</span></div>
       </div>
     </div>
-    <div class="plan">
+    <div class="plan" id="plan">
       <h3 data-i="plan.h3">{{t:plan.h3}}</h3>
       <ol>
         <li><b data-i="plan.1.t">{{t:plan.1.t}}</b><span data-i="plan.1.d">{{t:plan.1.d}}</span></li>

@@ -19,21 +19,57 @@
   "centres": 0
  },
  "texts": {
+  "title": {
+   "hi": "सम्राट योद्धा फाउंडेशन | शिक्षा ही शक्ति है",
+   "en": "सम्राट योद्धा फाउंडेशन | Education is Power"
+  },
+  "meta.desc": {
+   "hi": "सम्राट योद्धा फाउंडेशन गाँव-गाँव में पाठशालाएँ चलाकर बच्चों और युवाओं तक शिक्षा, हुनर और संविधान की समझ पहुँचाता है। अपने ज़िले की पाठशाला खोजें, हमसे जुड़ें, ब्लॉग पढ़ें या दान करें।",
+   "en": "सम्राट योद्धा फाउंडेशन runs pathshalas in villages, bringing education, skills and an understanding of the Constitution to children and young people."
+  },
+  "heroes.label": {
+   "hi": "हमारे प्रेरणा स्रोत",
+   "en": "Our sources of inspiration"
+  },
+  "logo.alt": {
+   "hi": "सम्राट योद्धा फाउंडेशन का लोगो",
+   "en": "सम्राट योद्धा फाउंडेशन logo"
+  },
   "brand": {
    "hi": "सम्राट योद्धा<small>फाउंडेशन</small>",
    "en": ""
   },
-  "donate": {
-   "hi": "दान करें",
-   "en": "Donate"
+  "nav.aria": {
+   "hi": "मुख्य मेनू",
+   "en": "Main menu"
   },
-  "nav.work": {
-   "hi": "उपलब्धियाँ",
-   "en": "Achievements"
+  "nav.home": {
+   "hi": "होम",
+   "en": "Home"
   },
   "nav.about": {
    "hi": "हमारे बारे में",
    "en": "About us"
+  },
+  "nav.aboutIntro": {
+   "hi": "परिचय",
+   "en": "Introduction"
+  },
+  "nav.founder": {
+   "hi": "संस्थापक",
+   "en": "Founder"
+  },
+  "nav.plan": {
+   "hi": "8 सूत्री कार्य-योजना",
+   "en": "8-point plan"
+  },
+  "nav.programs": {
+   "hi": "कार्यक्रम",
+   "en": "Programmes"
+  },
+  "nav.progMain": {
+   "hi": "प्रमुख कार्यक्रम",
+   "en": "Key programmes"
   },
   "nav.courses": {
    "hi": "पाठ्यक्रम",
@@ -47,9 +83,13 @@
    "hi": "जुड़ें",
    "en": "Join"
   },
-  "nav.contact": {
-   "hi": "संपर्क",
-   "en": "Contact"
+  "nav.work": {
+   "hi": "उपलब्धियाँ",
+   "en": "Achievements"
+  },
+  "nav.media": {
+   "hi": "मीडिया",
+   "en": "Media"
   },
   "nav.gallery": {
    "hi": "झलकियाँ",
@@ -59,9 +99,29 @@
    "hi": "ब्लॉग",
    "en": "Blog"
   },
+  "nav.contact": {
+   "hi": "संपर्क",
+   "en": "Contact"
+  },
   "search.btn": {
    "hi": "सम्राट योद्धा फाउंडेशन के बारे में जानें",
    "en": "Learn about सम्राट योद्धा फाउंडेशन"
+  },
+  "donate": {
+   "hi": "दान करें",
+   "en": "Donate"
+  },
+  "nav.menu": {
+   "hi": "मेनू",
+   "en": "Menu"
+  },
+  "sl.label": {
+   "hi": "सम्राट योद्धा फाउंडेशन की झलकियाँ",
+   "en": "Highlights of सम्राट योद्धा फाउंडेशन"
+  },
+  "logo.big.alt": {
+   "hi": "सम्राट योद्धा फाउंडेशन का गोल लोगो: अशोक स्तंभ, किताब और विद्यार्थी",
+   "en": "Round logo of सम्राट योद्धा फाउंडेशन: Ashoka pillar, book and students"
   },
   "hero.h1": {
    "hi": "सम्राट योद्धा <span>फाउंडेशन</span>",
@@ -72,24 +132,36 @@
    "en": "Educate <b>★</b> Organise <b>★</b> Move forward"
   },
   "hero.lead": {
-   "hi": "हम गाँव-गाँव में पाठशालाएँ चलाकर बच्चों और युवाओं तक अच्छी पढ़ाई, हुनर और संविधान की समझ पहुँचाते हैं।",
-   "en": "We run pathshalas village by village, bringing good education, skills and an understanding of the Constitution to children and young people."
+   "hi": "हम गाँव-गाँव में पाठशालाओं के माध्यम से बच्चों और युवाओं तक गुणवत्तापूर्ण शिक्षा, हुनर, वैज्ञानिक सोच और संविधान की समझ पहुँचाने के लिए कार्यरत हैं।",
+   "en": "Through pathshalas in every village, we work to bring quality education, skills, scientific thinking and an understanding of the Constitution to children and young people."
   },
-  "hero.find": {
-   "hi": "अपने ज़िले का कोचिंग सेंटर खोजें",
-   "en": "Find a coaching centre in your district"
+  "hero.btn1": {
+   "hi": "पाठशाला से जुड़ें",
+   "en": "Join a pathshala"
   },
-  "join.cta": {
-   "hi": "ज्वाइन सम्राट योद्धा फाउंडेशन",
-   "en": "Join सम्राट योद्धा फाउंडेशन"
+  "hero.btn2": {
+   "hi": "स्वयंसेवक बनें",
+   "en": "Become a volunteer"
+  },
+  "hero.founderLbl": {
+   "hi": "संस्थापक",
+   "en": "Founder"
+  },
+  "sl.prev": {
+   "hi": "पिछली स्लाइड",
+   "en": "Previous slide"
+  },
+  "sl.next": {
+   "hi": "अगली स्लाइड",
+   "en": "Next slide"
+  },
+  "prog.h2": {
+   "hi": "हमारे प्रमुख कार्यक्रम",
+   "en": "Our key programmes"
   },
   "stats.h2": {
    "hi": "अब तक की उपलब्धियाँ",
    "en": "Our achievements so far"
-  },
-  "stats.note": {
-   "hi": "गाँव-गाँव में चल रही हमारी पाठशालाओं में बच्चे और युवा रोज़ शिक्षा, हुनर और संविधान की समझ से जुड़ रहे हैं। आप भी इस सफ़र का हिस्सा बनें — <a href=\"#join\">हमसे जुड़ें</a>।",
-   "en": "In our village pathshalas, children and young people connect every day with education, skills and an understanding of the Constitution. Be part of this journey — <a href=\"#join\">join us</a>."
   },
   "about.h2": {
    "hi": "पहले शिक्षा, फिर समाज में बदलाव",
@@ -267,6 +339,10 @@
    "hi": "मोबाइल नंबर",
    "en": "Mobile number"
   },
+  "j.mobile.ph": {
+   "hi": "10 अंकों का नंबर",
+   "en": "10-digit number"
+  },
   "j.district": {
    "hi": "ज़िला",
    "en": "District"
@@ -395,6 +471,10 @@
    "hi": "और क्या देना चाहते हैं?",
    "en": "What else would you like to give?"
   },
+  "d.other.ph": {
+   "hi": "जैसे स्कूल बैग, ड्रॉइंग का सामान",
+   "en": "e.g. school bags, drawing materials"
+  },
   "d.qr.cap": {
    "hi": "PhonePe, Google Pay, Paytm या BHIM, किसी भी UPI ऐप से यह QR कोड स्कैन करके दान करें।",
    "en": "Scan this QR code with any UPI app, such as PhonePe, Google Pay, Paytm or BHIM, to donate."
@@ -435,6 +515,10 @@
    "hi": "शिक्षा ही शक्ति है।",
    "en": "Education is power."
   },
+  "foot.aria": {
+   "hi": "फ़ुटर लिंक",
+   "en": "Footer links"
+  },
   "foot.web": {
    "hi": "वेबसाइट",
    "en": "Website"
@@ -443,49 +527,13 @@
    "hi": "साथ आइए",
    "en": "Get involved"
   },
+  "join.cta": {
+   "hi": "ज्वाइन सम्राट योद्धा फाउंडेशन",
+   "en": "Join सम्राट योद्धा फाउंडेशन"
+  },
   "foot.copy": {
    "hi": "सम्राट योद्धा फाउंडेशन",
    "en": "सम्राट योद्धा फाउंडेशन"
-  },
-  "search.close": {
-   "hi": "बंद करें",
-   "en": "Close"
-  },
-  "logo.alt": {
-   "hi": "सम्राट योद्धा फाउंडेशन का लोगो",
-   "en": "सम्राट योद्धा फाउंडेशन logo"
-  },
-  "nav.aria": {
-   "hi": "मुख्य मेनू",
-   "en": "Main menu"
-  },
-  "sl.label": {
-   "hi": "सम्राट योद्धा फाउंडेशन की झलकियाँ",
-   "en": "Highlights of सम्राट योद्धा फाउंडेशन"
-  },
-  "logo.big.alt": {
-   "hi": "सम्राट योद्धा फाउंडेशन का गोल लोगो: अशोक स्तंभ, किताब और विद्यार्थी",
-   "en": "Round logo of सम्राट योद्धा फाउंडेशन: Ashoka pillar, book and students"
-  },
-  "sl.prev": {
-   "hi": "पिछली स्लाइड",
-   "en": "Previous slide"
-  },
-  "sl.next": {
-   "hi": "अगली स्लाइड",
-   "en": "Next slide"
-  },
-  "j.mobile.ph": {
-   "hi": "10 अंकों का नंबर",
-   "en": "10-digit number"
-  },
-  "d.other.ph": {
-   "hi": "जैसे स्कूल बैग, ड्रॉइंग का सामान",
-   "en": "e.g. school bags, drawing materials"
-  },
-  "foot.aria": {
-   "hi": "फ़ुटर लिंक",
-   "en": "Footer links"
   },
   "search.title": {
    "hi": "वेबसाइट में खोजें",
@@ -495,13 +543,13 @@
    "hi": "खोजें: पाठशाला, दान, पाठ्यक्रम, ज़िला…",
    "en": "Search: pathshala, donation, courses, district…"
   },
-  "meta.desc": {
-   "hi": "सम्राट योद्धा फाउंडेशन गाँव-गाँव में पाठशालाएँ चलाकर बच्चों और युवाओं तक शिक्षा, हुनर और संविधान की समझ पहुँचाता है। अपने ज़िले की पाठशाला खोजें, हमसे जुड़ें, ब्लॉग पढ़ें या दान करें।",
-   "en": "सम्राट योद्धा फाउंडेशन runs pathshalas in villages, bringing education, skills and an understanding of the Constitution to children and young people."
+  "search.close": {
+   "hi": "बंद करें",
+   "en": "Close"
   },
-  "title": {
-   "hi": "सम्राट योद्धा फाउंडेशन | शिक्षा ही शक्ति है",
-   "en": "सम्राट योद्धा फाउंडेशन | Education is Power"
+  "hero.kidsAlt": {
+   "hi": "पाठशाला में किताब पढ़ते बच्चे",
+   "en": "Children reading a book at a pathshala"
   }
  },
  "people": [
@@ -712,5 +760,103 @@
   "व्यावसायिक प्रशिक्षण": "Vocational training"
  },
  "pathshalas": [],
- "gallery": []
+ "gallery": [],
+ "home": {
+  "founderImg": "images/founder-hero.jpg",
+  "kids": "images/hero-kids.jpg",
+  "heroes": [
+   {
+    "img": "images/prerna-01.jpg",
+    "name": "",
+    "name_en": ""
+   },
+   {
+    "img": "images/prerna-02.jpg",
+    "name": "",
+    "name_en": ""
+   },
+   {
+    "img": "images/prerna-03.jpg",
+    "name": "",
+    "name_en": ""
+   },
+   {
+    "img": "images/prerna-04.jpg",
+    "name": "",
+    "name_en": ""
+   },
+   {
+    "img": "images/prerna-05.jpg",
+    "name": "",
+    "name_en": ""
+   },
+   {
+    "img": "images/prerna-06.jpg",
+    "name": "",
+    "name_en": ""
+   },
+   {
+    "img": "images/prerna-07.jpg",
+    "name": "",
+    "name_en": ""
+   },
+   {
+    "img": "images/prerna-08.jpg",
+    "name": "",
+    "name_en": ""
+   },
+   {
+    "img": "images/prerna-09.jpg",
+    "name": "",
+    "name_en": ""
+   },
+   {
+    "img": "images/prerna-10.jpg",
+    "name": "",
+    "name_en": ""
+   }
+  ],
+  "programs": [
+   {
+    "t": "नि:शुल्क पाठशाला",
+    "t_en": "Free pathshalas",
+    "s": "",
+    "s_en": "",
+    "icon": "book",
+    "color": "purple"
+   },
+   {
+    "t": "शिक्षक प्रशिक्षण",
+    "t_en": "Teacher training",
+    "s": "",
+    "s_en": "",
+    "icon": "teacher",
+    "color": "orange"
+   },
+   {
+    "t": "बाल एवं किशोर विकास",
+    "t_en": "Child and adolescent development",
+    "s": "",
+    "s_en": "",
+    "icon": "people",
+    "color": "gold"
+   },
+   {
+    "t": "बोध",
+    "t_en": "Bodh",
+    "s": "सीखने का स्तरानुकूल",
+    "s_en": "learning at the right level",
+    "icon": "sprout",
+    "color": "green"
+   },
+   {
+    "t": "पंचकोश विकास",
+    "t_en": "Panchakosha development",
+    "s": "शारीरिक, मानसिक, बौद्धिक, भावनात्मक, नैतिक",
+    "s_en": "physical, mental, intellectual, emotional, moral",
+    "icon": "layers",
+    "color": "maroon"
+   }
+  ]
+ }
 }
