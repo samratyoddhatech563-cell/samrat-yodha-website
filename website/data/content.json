@@ -147,6 +147,14 @@
    "hi": "संस्थापक",
    "en": "Founder"
   },
+  "hero.founderName": {
+   "hi": "सम्राट शिवम (गुरुजी)",
+   "en": ""
+  },
+  "hero.founderOrg": {
+   "hi": "सम्राट योद्धा फाउंडेशन",
+   "en": ""
+  },
   "sl.prev": {
    "hi": "पिछली स्लाइड",
    "en": "Previous slide"

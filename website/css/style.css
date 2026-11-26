@@ -362,8 +362,7 @@ html[lang=en] .l-hi{display:none}
 .hx-founder figcaption{position:relative;margin-top:-50px;min-width:min(270px,92%);padding:18px 20px 10px;border-radius:12px;background:linear-gradient(180deg,#ffe27a,#f5c518);color:var(--deep);text-align:center;box-shadow:0 10px 24px rgba(0,0,0,.35)}
 .hx-founder small{position:absolute;top:-15px;left:50%;transform:translateX(-50%);padding:2px 14px;border-radius:6px;background:#fff;color:var(--deep);font-weight:800;font-size:15px;white-space:nowrap}
 .hx-founder b{display:block;font-family:"Baloo 2",sans-serif;font-weight:800;font-size:clamp(23px,2.3vw,34px);line-height:1.1}
-.fen{display:block;font-weight:700;font-size:16px}
-html[lang=en] .fen{display:none}
+.forg{display:block;margin-top:2px;font-weight:700;font-size:16px}
 .hx-kids{grid-area:kids;align-self:end;margin:0 0 calc(-1 * clamp(76px,7vw,112px));display:flex;justify-content:center}
 .hx-kids img{width:100%;max-width:330px;height:auto;-webkit-mask-image:radial-gradient(ellipse 60% 64% at 52% 62%,#000 55%,transparent 100%);mask-image:radial-gradient(ellipse 60% 64% at 52% 62%,#000 55%,transparent 100%)}
 .hero .slnav{bottom:70px}
@@ -380,7 +379,7 @@ html[lang=en] .fen{display:none}
   .hx .btn{flex:1 1 100%;justify-content:center}
   .hx-founder b{font-size:20px}
   .hx-founder small{font-size:13px}
-  .fen{font-size:13px}
+  .forg{font-size:13px}
   .hx-founder figcaption{padding:14px 8px 8px;margin-top:-34px;min-width:0;width:96%}
 }
 /* प्रमुख कार्यक्रम */
