@@ -53,6 +53,23 @@ const message=j=>`नमस्कार,
 सम्राट योद्धा फाउंडेशन
 Job Portal`;
 const waBtn=(text,sent,num=cfg.whatsapp)=>num?`<a class="wa" href="${esc(waLink(text,num))}" target="_blank" rel="noopener" ${sent?`onclick="setTimeout(()=>location.hash='sent',400)"`:''}>${I('wa')}WhatsApp पर संपर्क करें</a>`:'';
+async function sendMessage(e){
+ e.preventDefault();
+ const form=e.target,v=id=>form.querySelector('#'+id).value.trim(),err=form.querySelector('#ce'),btn=form.querySelector('#cb');
+ let phone=v('cp').replace(/\D/g,'');if(phone.length===12&&phone.startsWith('91'))phone=phone.slice(2);if(phone.length===11&&phone[0]==='0')phone=phone.slice(1);
+ err.textContent='';
+ if(v('cn').length<2||v('cm').length<2){err.textContent='नाम और संदेश लिखें।';return}
+ if(!/^[6-9]\d{9}$/.test(phone)){err.textContent='सही 10 अंकों का मोबाइल नंबर लिखें।';return}
+ btn.disabled=true;btn.textContent='भेजा जा रहा है…';
+ try{
+  const r=await fetch(SB_URL+'/rest/v1/messages',{method:'POST',headers:{apikey:SB_KEY,'Content-Type':'application/json',Prefer:'return=minimal'},body:JSON.stringify({name:v('cn'),phone,district:v('cd'),message:v('cm')})});
+  if(!r.ok)throw Error(await r.text());
+  form.innerHTML=`<div class="done"><div class="tick">${I('check')}</div><h2>आपका संदेश<br>मिल गया!</h2><div class="box"><p>आपका संदेश सेव हो गया है।</p></div><a class="more" href="#home">${I('back')}होम पेज पर जाएँ</a></div>`;scrollTo(0,0);
+ }catch(x){
+  err.textContent=String(x.message).includes('too_many')?'बहुत सारे संदेश आ चुके हैं। कुछ देर बाद कोशिश करें।':'संदेश सेव नहीं हुआ। इंटरनेट जाँचकर दोबारा भेजें।';
+  btn.disabled=false;btn.textContent='संदेश भेजें';
+ }
+}
 function render(){
  const [page,arg]=(location.hash.slice(1)||'home').split('/');let h='';
  if(page==='categories') h=bar('नौकरी की श्रेणियां','#home')+`<div class="grid">${CATS.map(c=>`<a class="cat" href="#category/${c.id}">${art(c,'pic')}<span>${c.hi}<small>(${c.en})</small></span></a>`).join('')}</div>`+nav('categories');
@@ -75,11 +92,18 @@ function render(){
  }
  else if(page==='sent') h=brand()+`<div class="done"><div class="tick">${I('check')}</div><h2>संपर्क अनुरोध<br>भेज दिया गया!</h2><div class="box"><p>आपका संदेश WhatsApp<br>पर तैयार है।</p><p>अब “Send” बटन दबाकर<br>संदेश भेज दें।</p></div><a class="more" href="#jobs">${I('back')}अन्य नौकरियां देखें</a></div>`;
  else if(page==='about') h=bar('हमारे बारे में','#home')+`<div class="about">${esc(cfg.about)}</div>`+nav('');
- else if(page==='contact') h=bar('संपर्क','#home')+`<div class="done"><h2>सम्राट योद्धा फाउंडेशन</h2><div class="box"><p>नौकरी से जुड़ी जानकारी के लिए<br>WhatsApp पर संपर्क करें।</p></div>${waBtn('नमस्कार, मुझे Job Portal के बारे में जानकारी चाहिए।')}</div>`+nav('contact');
+ else if(page==='contact') h=bar('संपर्क','#home')+`<form class="cform" id="cf"><h2>हमें अपना संदेश भेजें</h2>
+  <label for="cn">नाम *</label><input id="cn" required minlength="2" maxlength="80" autocomplete="name">
+  <label for="cp">मोबाइल नंबर *</label><input id="cp" type="tel" inputmode="numeric" required maxlength="14" autocomplete="tel" placeholder="10 अंकों का नंबर">
+  <label for="cd">ज़िला</label><input id="cd" maxlength="80">
+  <label for="cm">आपका संदेश *</label><textarea id="cm" rows="5" required minlength="2" maxlength="1000"></textarea>
+  <p class="hint">आपकी जानकारी सेव होगी और सिर्फ़ आपसे संपर्क करने के लिए इस्तेमाल होगी।</p>
+  <p class="cerr" id="ce" role="alert"></p><button class="more send" id="cb">संदेश भेजें</button></form>`+nav('contact');
  else h=brand()+`<div class="home"><section class="hero"><img src="img/hero-v2.webp" alt=""><div><h2>रोजगार के<br>बेहतरीन<br>अवसर</h2><p>योग्यता के अनुसार<br>अपने लिए सही<br>नौकरी खोजें</p></div></section>
   <form class="search" id="sf">${I('search')}<input id="hq" placeholder="यहाँ नौकरी खोजें..." aria-label="नौकरी खोजें" autocomplete="off"></form><div class="sug" id="sug" hidden></div>
   <div class="tiles"><a class="tile t1" href="#jobs">${I('bag')}सभी नौकरियां</a><a class="tile t2" href="#categories">${I('gridi')}नौकरी श्रेणियां</a><a class="tile t3" href="#latest">${I('star')}नवीनतम<br>नौकरियां</a><a class="tile t4" href="#about">${I('info')}हमारे बारे में</a></div></div>`+nav('home');
  $app.innerHTML=h;
+ const cf=document.getElementById('cf');if(cf)cf.onsubmit=sendMessage;
  const hq=document.getElementById('hq');if(hq)suggest(hq,document.getElementById('sug'));
  const f=document.getElementById('sf');if(f)f.onsubmit=e=>{e.preventDefault();q=document.getElementById('hq').value.trim();keep=true;location.hash='jobs'};
 }
@@ -87,4 +111,4 @@ let keep=false;
 addEventListener('hashchange',()=>{if(!keep)q='';keep=false;render();scrollTo(0,0)});
 render();
 Promise.all([api('jobs?select=*&is_active=eq.true&order=sort_order.asc,created_at.desc'),api('settings?select=*&id=eq.1')])
- .then(([j,s])=>{jobs=j.filter(x=>CATS.some(c=>c.id===x.category));cfg=s[0]||cfg;state='ok';render()}).catch(()=>{state='error';render()});
+ .then(([j,s])=>{jobs=j.filter(x=>CATS.some(c=>c.id===x.category));cfg=s[0]||cfg;state='ok';if(!document.getElementById('cf'))render()}).catch(()=>{state='error';if(!document.getElementById('cf'))render()});

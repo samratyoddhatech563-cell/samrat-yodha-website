@@ -1,5 +1,5 @@
 const $app=document.getElementById('app'),$=id=>document.getElementById(id);
-let token=sessionStorage.getItem('jt')||'',jobs=[],cfg={};
+let token=sessionStorage.getItem('jt')||'',jobs=[],cfg={},msgs=[];
 async function call(path,method='GET',body){
  const r=await fetch(SB_URL+path,{method,headers:{apikey:SB_KEY,'Content-Type':'application/json',Prefer:'return=representation',...(token&&{Authorization:'Bearer '+token})},body:body&&JSON.stringify(body)});
  const t=await r.text(),d=t?JSON.parse(t):null;
@@ -12,10 +12,12 @@ function login(){$app.innerHTML=head('Admin Panel')+`<form id="f"><label>ईम�
  $('f').onsubmit=async ev=>{ev.preventDefault();try{const d=await call('/auth/v1/token?grant_type=password','POST',{email:$('e').value,password:$('p').value});token=d.access_token;
   const a=await call('/rest/v1/admins?select=user_id');if(!a.length){token='';throw Error('इस खाते को admin अनुमति नहीं है')}
   sessionStorage.setItem('jt',token);home()}catch(e){fail(e)}}}
-async function home(){try{[jobs,[cfg]]=await Promise.all([call('/rest/v1/jobs?select=*&order=sort_order.asc,created_at.desc'),call('/rest/v1/settings?select=*&id=eq.1')])}catch(e){return token&&($app.innerHTML=head('Admin Panel'),fail(e))}
- $app.innerHTML=head('Admin Panel')+`<div class="pad"><button class="btn" onclick="edit()">+ नई नौकरी जोड़ें</button><h3 style="margin:18px 0 8px">नौकरी सूची (${jobs.length})</h3>
+async function home(){try{[jobs,[cfg],msgs]=await Promise.all([call('/rest/v1/jobs?select=*&order=sort_order.asc,created_at.desc'),call('/rest/v1/settings?select=*&id=eq.1'),call('/rest/v1/messages?select=*&order=created_at.desc&limit=500')])}catch(e){return token&&($app.innerHTML=head('Admin Panel'),fail(e))}
+ $app.innerHTML=head('Admin Panel')+`<div class="pad"><h3 style="margin-bottom:8px">आए हुए संदेश (${msgs.length})</h3>
+ ${msgs.map(m=>`<div class="item"><b>${esc(m.name)}</b> · <a href="tel:${esc(m.phone)}">${esc(m.phone)}</a><br><small>${esc(m.district)} ${new Date(m.created_at).toLocaleString('hi-IN')}</small><p style="white-space:pre-wrap;margin-top:6px">${esc(m.message)}</p><button class="btn red" onclick="delMsg(${m.id})">हटाएँ</button></div>`).join('')||'<p>अभी कोई संदेश नहीं है।</p>'}
+ <button class="btn" onclick="edit()">+ नई नौकरी जोड़ें</button><h3 style="margin:18px 0 8px">नौकरी सूची (${jobs.length})</h3>
  ${jobs.map(j=>`<div class="item"><b>${esc(j.title_hi)}</b> ${j.is_active?'':'(छिपी हुई)'}<br><small>${esc(j.location)} · क्रम ${j.sort_order}</small><br><button class="btn" onclick="edit(${j.id})">संपादित करें</button> <button class="btn gray" onclick="toggle(${j.id})">${j.is_active?'छिपाएँ':'दिखाएँ'}</button> <button class="btn red" onclick="del(${j.id})">हटाएँ</button></div>`).join('')}</div>
- <form id="s"><h3>सेटिंग</h3><label>WhatsApp नंबर (91 के साथ)</label><input id="wn" inputmode="numeric" pattern="91[0-9]{10}" required value="${esc(cfg.whatsapp)}"><label>हमारे बारे में</label><textarea id="ab" rows="6">${esc(cfg.about)}</textarea><button class="btn">सेटिंग सेव करें</button></form>`;
+ <form id="s"><h3>सेटिंग</h3><label>मुख्य WhatsApp नंबर (91 के साथ, खाली रख सकते हैं)</label><input id="wn" inputmode="numeric" pattern="91[0-9]{10}" value="${esc(cfg.whatsapp)}"><label>हमारे बारे में</label><textarea id="ab" rows="6">${esc(cfg.about)}</textarea><button class="btn">सेटिंग सेव करें</button></form>`;
  $('s').onsubmit=async e=>{e.preventDefault();try{const r=await call('/rest/v1/settings?id=eq.1','PATCH',{whatsapp:$('wn').value,about:$('ab').value});if(!r.length)throw Error('सेव नहीं हुआ');$('msg').textContent='✓ सेव हो गया';scrollTo(0,0)}catch(x){fail(x)}}}
 const F=[['title_hi','पद का नाम (हिंदी)',1],['title_en','पद का नाम (English)'],['location','स्थान (छोटा, जैसे लखनऊ, उ.प्र.)',1],['location_full','पूरा स्थान'],['salary','वेतन',1],['qualification','योग्यता',1],['organisation','संस्था'],['experience','अनुभव'],['duties','कार्य'],['whatsapp','इस नौकरी का WhatsApp नंबर (खाली छोड़ें तो मुख्य नंबर)'],['sort_order','सूची में क्रम (संख्या)']];
 function edit(id){const j=jobs.find(x=>x.id===id)||{category:CATS[0].id,organisation:'सम्राट योद्धा फाउंडेशन',is_new:true,is_active:true,sort_order:0};
@@ -28,5 +30,6 @@ function edit(id){const j=jobs.find(x=>x.id===id)||{category:CATS[0].id,organisa
   if(b.whatsapp&&!/^91\d{10}$/.test(w))return fail(Error('WhatsApp नंबर 10 अंकों का लिखें'));b.whatsapp=w;
   try{const r=await call('/rest/v1/jobs'+(id?'?id=eq.'+id:''),id?'PATCH':'POST',b);if(!r.length)throw Error('सेव नहीं हुआ');home()}catch(x){fail(x)}}}
 async function toggle(id){try{await call('/rest/v1/jobs?id=eq.'+id,'PATCH',{is_active:!jobs.find(x=>x.id===id).is_active});home()}catch(e){fail(e)}}
+async function delMsg(id){if(!confirm('क्या यह संदेश हटाना है?'))return;try{await call('/rest/v1/messages?id=eq.'+id,'DELETE');home()}catch(e){fail(e)}}
 async function del(id){if(!confirm('क्या यह नौकरी हटानी है?'))return;try{await call('/rest/v1/jobs?id=eq.'+id,'DELETE');home()}catch(e){fail(e)}}
 token?home():login();

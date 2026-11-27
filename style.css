@@ -63,3 +63,6 @@ svg{width:1.25em;height:1.25em;fill:none;stroke:currentColor;stroke-width:2.2;st
 .sug button{display:flex;gap:10px;align-items:center;width:100%;text-align:left;padding:11px 14px;border-top:1px solid #eee;font-size:14px;font-weight:600;color:#17135c}
 .sug button svg{color:#52108f}.sug button small{margin-left:auto;font-size:11px;color:#6b6685;font-weight:500;white-space:nowrap}
 .art{display:grid;place-items:center;background:#f0ebfb}.art svg{width:56px;height:56px;stroke-width:1.7}.note{margin:8px 14px 0;font-size:12px;color:#555a72;background:#f6f5fa;border-radius:8px;padding:9px 11px}
+.cform{padding:14px 16px}.cform h2{color:#2a1272;font-size:19px}.cform label{display:block;font-weight:600;font-size:13px;margin:12px 0 4px}
+.cform input,.cform textarea{width:100%;font:inherit;font-size:16px;padding:11px;border:1px solid #c9c3dd;border-radius:10px;outline-color:#52108f}
+.hint{font-size:12px;color:#555a72;margin-top:10px}.cerr{color:#b00020;font-weight:600;font-size:14px;margin-top:8px}.cform>.send{width:100%;margin-top:12px}.cform .done{padding:20px 0}
