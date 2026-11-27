@@ -1,4 +1,4 @@
-const P={menu:'M3 6h18M3 12h18M3 18h18',back:'M20 12H4m7-7-7 7 7 7',next:'M9 5l7 7-7 7',search:'M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zm5 12 5 5',
+const P={box:'M3 8l9-5 9 5v9l-9 5-9-5zM3 8l9 5 9-5M12 13v9',shield:'M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6zM8.5 12l2.500 2.500 4.500-5',menu:'M3 6h18M3 12h18M3 18h18',back:'M20 12H4m7-7-7 7 7 7',next:'M9 5l7 7-7 7',search:'M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zm5 12 5 5',
 home:'M3 11 12 3l9 8M5 10v10h5v-6h4v6h5V10',gridi:'M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z',bag:'M3 8h18v12H3zM9 8V4h6v4M3 13h18',
 phone:'M5 4h4l2 5-2.500 1.500a12 12 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z',star:'m12 3 2.700 5.600 6.100.8-4.500 4.300 1.100 6.100L12 16.900l-5.400 2.900 1.100-6.100-4.500-4.300 6.100-.8z',
 info:'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zm0 8v6m0-10v.1',pin:'M12 21s-7-6.500-7-12a7 7 0 0 1 14 0c0 5.500-7 12-7 12zm0-14.500a2.500 2.500 0 1 0 0 5 2.500 2.500 0 0 0 0-5z',
@@ -11,6 +11,7 @@ const $app=document.getElementById('app');
 let jobs=[],cfg={whatsapp:'',about:''},state='loading',q='';
 const api=p=>fetch(SB_URL+'/rest/v1/'+p,{headers:{apikey:SB_KEY}}).then(r=>{if(!r.ok)throw r.status;return r.json()});
 const cat=id=>CATS.find(c=>c.id===id)||CATS[0];
+const art=(c,cls)=>c.img?`<img class="${cls}" src="img/${c.img}.jpg" alt="">`:`<div class="${cls} art" style="color:${c.c}">${I(c.ic)}</div>`;
 const brand=()=>`<header class="brand"><img src="img/logo.webp" alt="सम्राट योद्धा फाउंडेशन"><div>सम्राट योद्धा फाउंडेशन<b>Job Portal</b></div><button aria-label="मेन्यू" onclick="document.querySelector('.menu').classList.add('open')">${I('menu')}</button></header>
 <div class="menu" onclick="this.classList.remove('open')"><nav><a href="#home">होम</a><a href="#categories">नौकरी श्रेणियां</a><a href="#jobs">सभी नौकरियां</a><a href="#latest">नवीनतम नौकरियां</a><a href="#about">हमारे बारे में</a><a href="#contact">संपर्क</a></nav></div>`;
 const bar=(t,back,right='')=>`<header class="top"><a href="${back}" aria-label="वापस">${I('back')}</a><h1>${t}</h1>${right}</header>`;
@@ -54,7 +55,7 @@ Job Portal`;
 const waBtn=(text,sent,num=cfg.whatsapp)=>num?`<a class="wa" href="${esc(waLink(text,num))}" target="_blank" rel="noopener" ${sent?`onclick="setTimeout(()=>location.hash='sent',400)"`:''}>${I('wa')}WhatsApp पर संपर्क करें</a>`:'';
 function render(){
  const [page,arg]=(location.hash.slice(1)||'home').split('/');let h='';
- if(page==='categories') h=bar('नौकरी की श्रेणियां','#home')+`<div class="grid">${CATS.map(c=>`<a class="cat" href="#category/${c.id}"><img src="img/${c.img}.jpg" alt=""><span>${c.hi}<small>(${c.en})</small></span></a>`).join('')}</div>`+nav('categories');
+ if(page==='categories') h=bar('नौकरी की श्रेणियां','#home')+`<div class="grid">${CATS.map(c=>`<a class="cat" href="#category/${c.id}">${art(c,'pic')}<span>${c.hi}<small>(${c.en})</small></span></a>`).join('')}</div>`+nav('categories');
  else if(['jobs','latest','category'].includes(page)){
   let l=jobs;if(page==='category')l=jobs.filter(j=>j.category===arg);if(page==='latest')l=[...jobs].sort((a,b)=>b.created_at.localeCompare(a.created_at)||a.sort_order-b.sort_order).slice(0,20);
   const name=page==='latest'?'नवीनतम नौकरियां':'उपलब्ध नौकरियां';
@@ -69,8 +70,8 @@ function render(){
   h=bar('नौकरी का पूरा विवरण','#jobs');
   if(!j)h+=status('यह नौकरी अब उपलब्ध नहीं है।');else{
    const rows=[['bank','संस्था',j.organisation],['pin','स्थान',j.location_full||j.location],['money','वेतन',j.salary],['cap','योग्यता',j.qualification],['user','अनुभव',j.experience],['tasks','कार्य',j.duties]].filter(r=>r[2]);
-   h+=`<img class="banner" src="img/${cat(j.category).img}.jpg" alt=""><div class="dtitle"><span class="ic">${I(cat(j.category).ic)}</span>${title(j,'h2')}</div><div class="sec">${I('bank')}नौकरी की जानकारी</div>
-   <table class="info">${rows.map(r=>`<tr><td>${I(r[0])}</td><td>${r[1]}</td><td>:</td><td>${esc(r[2])}</td></tr>`).join('')}</table>${waBtn(message(j),true,j.whatsapp||cfg.whatsapp)}`}
+   h+=`${art(cat(j.category),'banner')}<div class="dtitle"><span class="ic">${I(cat(j.category).ic)}</span>${title(j,'h2')}</div><div class="sec">${I('bank')}नौकरी की जानकारी</div>
+   <table class="info">${rows.map(r=>`<tr><td>${I(r[0])}</td><td>${r[1]}</td><td>:</td><td>${esc(r[2])}</td></tr>`).join('')}</table>${cat(j.category).note?'<p class="note">यह सम्राट योद्धा फाउंडेशन का Job Portal है, ऊपर लिखी कंपनी की आधिकारिक वेबसाइट नहीं।</p>':''}${waBtn(message(j),true,j.whatsapp||cfg.whatsapp)}`}
  }
  else if(page==='sent') h=brand()+`<div class="done"><div class="tick">${I('check')}</div><h2>संपर्क अनुरोध<br>भेज दिया गया!</h2><div class="box"><p>आपका संदेश WhatsApp<br>पर तैयार है।</p><p>अब “Send” बटन दबाकर<br>संदेश भेज दें।</p></div><a class="more" href="#jobs">${I('back')}अन्य नौकरियां देखें</a></div>`;
  else if(page==='about') h=bar('हमारे बारे में','#home')+`<div class="about">${esc(cfg.about)}</div>`+nav('');
