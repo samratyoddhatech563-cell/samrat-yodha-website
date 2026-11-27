@@ -19,8 +19,26 @@ const title=(j,tag)=>`<${tag}>${esc(j.title_hi)}${j.title_en?`<small>(${esc(j.ti
 const card=j=>`<a class="job" href="#job/${j.id}"><div class="jh"><span class="ic" style="color:${cat(j.category).c}">${I(cat(j.category).ic)}</span>${title(j,'h3')}</div>${j.is_new?'<span class="new">नया</span>':''}
 <div class="row loc">${I('pin')}${esc(j.location)}</div><div class="row sal">${I('money')}${esc(j.salary)}</div><div class="row">${I('bank')}<span><b>योग्यता:</b> ${esc(j.qualification)}</span></div><span class="arrow">${I('next')}</span></a>`;
 const status=t=>state==='loading'?'<p class="empty">लोड हो रहा है…</p>':state==='error'?'<p class="empty">जानकारी लोड नहीं हो सकी। इंटरनेट जाँचकर पेज दोबारा खोलें।</p>':`<p class="empty">${t}</p>`;
-const match=j=>!q||[j.title_hi,j.title_en,j.location,j.location_full,j.qualification,cat(j.category).en].join(' ').toLowerCase().includes(q.toLowerCase());
+const match=j=>!q||[j.title_hi,j.title_en,j.location,j.location_full,j.qualification,cat(j.category).en,cat(j.category).hi.replace('<br>',' ')].join(' ').toLowerCase().includes(q.toLowerCase());
 const listHtml=l=>{l=l.filter(match);return state==='ok'&&l.length?l.map(card).join(''):status('अभी कोई नौकरी उपलब्ध नहीं है।')};
+function suggestions(){
+ const out=jobs.map(j=>({ic:cat(j.category).ic,text:j.title_hi+(j.title_en?` (${j.title_en})`:''),tag:'नौकरी',go:'job/'+j.id,key:[j.title_hi,j.title_en,j.qualification].join(' ')}));
+ CATS.filter(c=>jobs.some(j=>j.category===c.id)).forEach(c=>{const hi=c.hi.replace('<br>',' ');out.push({ic:c.ic,text:`${hi} (${c.en})`,tag:'श्रेणी',go:'category/'+c.id,key:hi+' '+c.en})});
+ [...new Set(jobs.map(j=>j.location).filter(Boolean))].forEach(l=>out.push({ic:'pin',text:l,tag:'स्थान',find:l,key:[l,...jobs.filter(j=>j.location===l).map(j=>j.location_full)].join(' ')}));
+ return out}
+function suggest(input,box){
+ const show=()=>{
+  if(state!=='ok'||!jobs.length){box.hidden=true;return}
+  const all=suggestions(),v=input.value.trim().toLowerCase(),hit=v?all.filter(s=>(s.text+' '+s.key).toLowerCase().includes(v)):all,list=hit.length?hit:all;
+  box.innerHTML=(hit.length?'<p>उपलब्ध नौकरियों के सुझाव</p>':'<p class="no">इस नाम की नौकरी अभी उपलब्ध नहीं है। इनमें से चुनें:</p>')+list.map((s,i)=>`<button type="button" data-i="${i}">${I(s.ic)}<span>${esc(s.text)}</span><small>${s.tag}</small></button>`).join('');
+  box.hidden=false;
+  box.querySelectorAll('button').forEach(b=>b.onclick=()=>{const s=list[b.dataset.i];box.hidden=true;input.blur();
+   if(s.go)location.hash=s.go;else{q=s.find;if(location.hash==='#jobs')render();else{keep=true;location.hash='jobs'}}})};
+ box.onmousedown=e=>e.preventDefault();
+ input.onfocus=show;input.onclick=show;input.addEventListener('input',show);
+ input.onblur=()=>setTimeout(()=>box.hidden=true,150);
+ input.onkeydown=e=>{if(e.key==='Escape')box.hidden=true;if(e.key==='Enter')box.hidden=true};
+}
 const waLink=text=>`https://wa.me/${cfg.whatsapp.replace(/\D/g,'')}?text=${encodeURIComponent(text)}`;
 const message=j=>`नमस्कार,
 
@@ -41,9 +59,10 @@ function render(){
   let l=jobs;if(page==='category')l=jobs.filter(j=>j.category===arg);if(page==='latest')l=[...jobs].sort((a,b)=>b.created_at.localeCompare(a.created_at)||a.sort_order-b.sort_order).slice(0,20);
   const name=page==='latest'?'नवीनतम नौकरियां':'उपलब्ध नौकरियां';
   h=bar(`${name}${state==='ok'?` (${l.length})`:''}`,page==='category'?'#categories':'#home',`<button aria-label="खोजें" id="sbtn">${I('search')}</button>`)+
-  `<label class="search" id="sbox" style="margin:10px;border:1px solid #ccc;${q?'':'display:none'}">${I('search')}<input id="q" placeholder="यहाँ नौकरी खोजें..." value="${esc(q)}"></label><div class="list" id="list">${listHtml(l)}</div>`+nav('jobs');
+  `<label class="search" id="sbox" style="margin:10px;border:1px solid #ccc;${q?'':'display:none'}">${I('search')}<input id="q" placeholder="यहाँ नौकरी खोजें..." value="${esc(q)}" autocomplete="off"></label><div class="sug" id="sug" hidden></div><div class="list" id="list">${listHtml(l)}</div>`+nav('jobs');
   $app.innerHTML=h;
   document.getElementById('sbtn').onclick=()=>{const b=document.getElementById('sbox');b.style.display='';document.getElementById('q').focus()};
+  suggest(document.getElementById('q'),document.getElementById('sug'));
   document.getElementById('q').oninput=e=>{q=e.target.value;document.getElementById('list').innerHTML=listHtml(l)};return}
  else if(page==='job'){
   const j=jobs.find(x=>String(x.id)===arg);
@@ -56,10 +75,11 @@ function render(){
  else if(page==='sent') h=brand()+`<div class="done"><div class="tick">${I('check')}</div><h2>संपर्क अनुरोध<br>भेज दिया गया!</h2><div class="box"><p>आपका संदेश WhatsApp<br>पर तैयार है।</p><p>अब “Send” बटन दबाकर<br>संदेश भेज दें।</p></div><a class="more" href="#jobs">${I('back')}अन्य नौकरियां देखें</a></div>`;
  else if(page==='about') h=bar('हमारे बारे में','#home')+`<div class="about">${esc(cfg.about)}</div>`+nav('');
  else if(page==='contact') h=bar('संपर्क','#home')+`<div class="done"><h2>सम्राट योद्धा फाउंडेशन</h2><div class="box"><p>नौकरी से जुड़ी जानकारी के लिए<br>WhatsApp पर संपर्क करें।</p></div>${waBtn('नमस्कार, मुझे Job Portal के बारे में जानकारी चाहिए।')}</div>`+nav('contact');
- else h=brand()+`<div class="home"><section class="hero"><img src="img/hero.jpg" alt=""><div><h2>रोजगार के<br>बेहतरीन<br>अवसर</h2><p>योग्यता के अनुसार<br>अपने लिए सही<br>नौकरी खोजें</p></div></section>
-  <form class="search" id="sf">${I('search')}<input id="hq" placeholder="यहाँ नौकरी खोजें..." aria-label="नौकरी खोजें"></form>
+ else h=brand()+`<div class="home"><section class="hero"><img src="img/hero-v2.webp" alt=""><div><h2>रोजगार के<br>बेहतरीन<br>अवसर</h2><p>योग्यता के अनुसार<br>अपने लिए सही<br>नौकरी खोजें</p></div></section>
+  <form class="search" id="sf">${I('search')}<input id="hq" placeholder="यहाँ नौकरी खोजें..." aria-label="नौकरी खोजें" autocomplete="off"></form><div class="sug" id="sug" hidden></div>
   <div class="tiles"><a class="tile t1" href="#jobs">${I('bag')}सभी नौकरियां</a><a class="tile t2" href="#categories">${I('gridi')}नौकरी श्रेणियां</a><a class="tile t3" href="#latest">${I('star')}नवीनतम<br>नौकरियां</a><a class="tile t4" href="#about">${I('info')}हमारे बारे में</a></div></div>`+nav('home');
  $app.innerHTML=h;
+ const hq=document.getElementById('hq');if(hq)suggest(hq,document.getElementById('sug'));
  const f=document.getElementById('sf');if(f)f.onsubmit=e=>{e.preventDefault();q=document.getElementById('hq').value.trim();keep=true;location.hash='jobs'};
 }
 let keep=false;
