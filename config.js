@@ -8,5 +8,5 @@ const CATS=[
  {id:'field',hi:'फील्ड कार्य',en:'Field Work',img:'c5',ic:'pin',c:'#b45309'},
  {id:'payment',hi:'पेटीएम /<br>गूगल पे',en:'Paytm / Google Pay',ic:'money',c:'#1d4ed8',note:1},
  {id:'blinkit',hi:'ब्लिंकिट<br>कार्य',en:'Blinkit',ic:'box',c:'#a16207',note:1},
- {id:'security',hi:'सिक्योरिटी<br>कार्य',en:'Security',ic:'shield',c:'#7c2d92'}];
+ {id:'security',img:'security',pos:'50% 0',hi:'सिक्योरिटी<br>कार्य',en:'Security',ic:'shield',c:'#7c2d92'}];
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));

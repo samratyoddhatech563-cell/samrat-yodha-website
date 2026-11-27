@@ -11,7 +11,7 @@ const $app=document.getElementById('app');
 let jobs=[],cfg={whatsapp:'',about:''},state='loading',q='';
 const api=p=>fetch(SB_URL+'/rest/v1/'+p,{headers:{apikey:SB_KEY}}).then(r=>{if(!r.ok)throw r.status;return r.json()});
 const cat=id=>CATS.find(c=>c.id===id)||CATS[0];
-const art=(c,cls)=>c.img?`<img class="${cls}" src="img/${c.img}.jpg" alt="">`:`<div class="${cls} art" style="color:${c.c}">${I(c.ic)}</div>`;
+const art=(c,cls)=>c.img?`<img class="${cls}" src="img/${c.img}.jpg" alt=""${c.pos?` style="object-position:${c.pos}"`:''}>`:`<div class="${cls} art" style="color:${c.c}">${I(c.ic)}</div>`;
 const brand=()=>`<header class="brand"><img src="img/logo.webp" alt="सम्राट योद्धा फाउंडेशन"><div>सम्राट योद्धा फाउंडेशन<b>Job Portal</b></div><button aria-label="मेन्यू" onclick="document.querySelector('.menu').classList.add('open')">${I('menu')}</button></header>
 <div class="menu" onclick="this.classList.remove('open')"><nav><a href="#home">होम</a><a href="#categories">नौकरी श्रेणियां</a><a href="#jobs">सभी नौकरियां</a><a href="#latest">नवीनतम नौकरियां</a><a href="#about">हमारे बारे में</a><a href="#contact">संपर्क</a></nav></div>`;
 const bar=(t,back,right='')=>`<header class="top"><a href="${back}" aria-label="वापस">${I('back')}</a><h1>${t}</h1>${right}</header>`;
