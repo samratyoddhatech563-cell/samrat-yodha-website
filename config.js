@@ -2,7 +2,7 @@
 const SB_URL='https://dbwqzgpkffkqgajfymot.supabase.co';
 const SB_KEY='sb_publishable_OymizDuwPGJt-TOmNYoMyw_7OgNrPUX';
 const CATS=[
- {id:'computer',hi:'कंप्यूटर एवं<br>आईटी कार्य',en:'Computer & IT',img:'c2',ic:'laptop',c:'#1d4ed8'},
+ {id:'computer',hi:'कंप्यूटर एवं<br>आईटी कार्य',en:'Computer & IT',img:'it',pos:'50% 6%',ic:'laptop',c:'#1d4ed8'},
  {id:'office',hi:'ऑफिस एवं<br>प्रशासन',en:'Office & Admin',img:'c3',ic:'bag',c:'#7c2d92'},
  {id:'marketing',hi:'मार्केटिंग<br>एवं सेल्स',en:'Marketing & Sales',img:'c4',ic:'chart',c:'#15803d'},
  {id:'field',hi:'फील्ड कार्य',en:'Field Work',img:'c5',ic:'pin',c:'#b45309'},
