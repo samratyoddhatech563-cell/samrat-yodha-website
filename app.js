@@ -69,7 +69,7 @@ function render(){
   h=bar('नौकरी का पूरा विवरण','#jobs');
   if(!j)h+=status('यह नौकरी अब उपलब्ध नहीं है।');else{
    const rows=[['bank','संस्था',j.organisation],['pin','स्थान',j.location_full||j.location],['money','वेतन',j.salary],['cap','योग्यता',j.qualification],['user','अनुभव',j.experience],['tasks','कार्य',j.duties]].filter(r=>r[2]);
-   h+=`<img class="banner" src="img/${j.category==='teaching'?'teacher':cat(j.category).img}.jpg" alt=""><div class="dtitle"><span class="ic">${I(cat(j.category).ic)}</span>${title(j,'h2')}</div><div class="sec">${I('bank')}नौकरी की जानकारी</div>
+   h+=`<img class="banner" src="img/${cat(j.category).img}.jpg" alt=""><div class="dtitle"><span class="ic">${I(cat(j.category).ic)}</span>${title(j,'h2')}</div><div class="sec">${I('bank')}नौकरी की जानकारी</div>
    <table class="info">${rows.map(r=>`<tr><td>${I(r[0])}</td><td>${r[1]}</td><td>:</td><td>${esc(r[2])}</td></tr>`).join('')}</table>${waBtn(message(j),true)}`}
  }
  else if(page==='sent') h=brand()+`<div class="done"><div class="tick">${I('check')}</div><h2>संपर्क अनुरोध<br>भेज दिया गया!</h2><div class="box"><p>आपका संदेश WhatsApp<br>पर तैयार है।</p><p>अब “Send” बटन दबाकर<br>संदेश भेज दें।</p></div><a class="more" href="#jobs">${I('back')}अन्य नौकरियां देखें</a></div>`;
@@ -86,4 +86,4 @@ let keep=false;
 addEventListener('hashchange',()=>{if(!keep)q='';keep=false;render();scrollTo(0,0)});
 render();
 Promise.all([api('jobs?select=*&is_active=eq.true&order=sort_order.asc,created_at.desc'),api('settings?select=*&id=eq.1')])
- .then(([j,s])=>{jobs=j;cfg=s[0]||cfg;state='ok';render()}).catch(()=>{state='error';render()});
+ .then(([j,s])=>{jobs=j.filter(x=>CATS.some(c=>c.id===x.category));cfg=s[0]||cfg;state='ok';render()}).catch(()=>{state='error';render()});
