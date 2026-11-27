@@ -39,7 +39,7 @@ function suggest(input,box){
  input.onblur=()=>setTimeout(()=>box.hidden=true,150);
  input.onkeydown=e=>{if(e.key==='Escape')box.hidden=true;if(e.key==='Enter')box.hidden=true};
 }
-const waLink=text=>`https://wa.me/${cfg.whatsapp.replace(/\D/g,'')}?text=${encodeURIComponent(text)}`;
+const waLink=(text,num)=>`https://wa.me/${num.replace(/\D/g,'')}?text=${encodeURIComponent(text)}`;
 const message=j=>`नमस्कार,
 
 मैं "${j.title_hi}${j.title_en?` (${j.title_en})`:''}" पद के लिए आवेदन/रुचि रखता/रखती हूँ।
@@ -51,7 +51,7 @@ const message=j=>`नमस्कार,
 धन्यवाद।
 सम्राट योद्धा फाउंडेशन
 Job Portal`;
-const waBtn=(text,sent)=>cfg.whatsapp?`<a class="wa" href="${esc(waLink(text))}" target="_blank" rel="noopener" ${sent?`onclick="setTimeout(()=>location.hash='sent',400)"`:''}>${I('wa')}WhatsApp पर संपर्क करें</a>`:'';
+const waBtn=(text,sent,num=cfg.whatsapp)=>num?`<a class="wa" href="${esc(waLink(text,num))}" target="_blank" rel="noopener" ${sent?`onclick="setTimeout(()=>location.hash='sent',400)"`:''}>${I('wa')}WhatsApp पर संपर्क करें</a>`:'';
 function render(){
  const [page,arg]=(location.hash.slice(1)||'home').split('/');let h='';
  if(page==='categories') h=bar('नौकरी की श्रेणियां','#home')+`<div class="grid">${CATS.map(c=>`<a class="cat" href="#category/${c.id}"><img src="img/${c.img}.jpg" alt=""><span>${c.hi}<small>(${c.en})</small></span></a>`).join('')}</div>`+nav('categories');
@@ -70,7 +70,7 @@ function render(){
   if(!j)h+=status('यह नौकरी अब उपलब्ध नहीं है।');else{
    const rows=[['bank','संस्था',j.organisation],['pin','स्थान',j.location_full||j.location],['money','वेतन',j.salary],['cap','योग्यता',j.qualification],['user','अनुभव',j.experience],['tasks','कार्य',j.duties]].filter(r=>r[2]);
    h+=`<img class="banner" src="img/${cat(j.category).img}.jpg" alt=""><div class="dtitle"><span class="ic">${I(cat(j.category).ic)}</span>${title(j,'h2')}</div><div class="sec">${I('bank')}नौकरी की जानकारी</div>
-   <table class="info">${rows.map(r=>`<tr><td>${I(r[0])}</td><td>${r[1]}</td><td>:</td><td>${esc(r[2])}</td></tr>`).join('')}</table>${waBtn(message(j),true)}`}
+   <table class="info">${rows.map(r=>`<tr><td>${I(r[0])}</td><td>${r[1]}</td><td>:</td><td>${esc(r[2])}</td></tr>`).join('')}</table>${waBtn(message(j),true,j.whatsapp||cfg.whatsapp)}`}
  }
  else if(page==='sent') h=brand()+`<div class="done"><div class="tick">${I('check')}</div><h2>संपर्क अनुरोध<br>भेज दिया गया!</h2><div class="box"><p>आपका संदेश WhatsApp<br>पर तैयार है।</p><p>अब “Send” बटन दबाकर<br>संदेश भेज दें।</p></div><a class="more" href="#jobs">${I('back')}अन्य नौकरियां देखें</a></div>`;
  else if(page==='about') h=bar('हमारे बारे में','#home')+`<div class="about">${esc(cfg.about)}</div>`+nav('');
